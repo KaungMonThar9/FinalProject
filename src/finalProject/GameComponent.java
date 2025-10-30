@@ -8,7 +8,7 @@ public class GameComponent extends JComponent {
 
 	private static final long serialVersionUID = 1L;
 	
-	// We can change these WIDTH and HEIGHT values
+	// We can change these WIDTH and HEIGHT values to adjust the window size
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 400;
 	Timer timer;

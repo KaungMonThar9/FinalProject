@@ -5,8 +5,10 @@ import java.awt.*;
 import javax.swing.*;
 
 public class GamePanel extends JPanel {
+	
 	private static final long serialVersionUID = 1L;
 	private final GameComponent canvas = new GameComponent();
+	Timer timer;
 	
 	public GamePanel() {
     	this.setLayout(new BorderLayout(8, 8));
@@ -14,6 +16,15 @@ public class GamePanel extends JPanel {
         //this.setBackground(canvas.BG);
         //this.add(buildControls(), BorderLayout.SOUTH);
         //this.buildKeys();
-    	
+
+	    timer = new Timer(30, e-> tick());
     }
+	
+	
+	/**
+	 * Runs every frame
+	 */
+	private void tick() {
+		
+	}
 }

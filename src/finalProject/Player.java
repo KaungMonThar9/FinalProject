@@ -3,6 +3,9 @@ package finalProject;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 /**
  * @author medhanshgupta
  */
@@ -13,16 +16,26 @@ public class Player {
   private boolean isOnGround=false; 
   private int yVel=0;
   private int dx = 0, dy = 0;
+  private final int speed=5; 
+  private final int JUMP_STRENGTH = -15;
+  private boolean facingRight; 
  
   
-  private BufferedImage sprite; 
+  private BufferedImage spriteLeft;
+  private BufferedImage spriteRight; 
   private boolean spriteLoaded = false;
+  
   
   public Player(double x,double y,BufferedImage sprite) {
 	  this.x=x; 
 	  this.y=y; 
-	  this.sprite=sprite; 
-	  }
+	  try {
+          spriteRight = ImageIO.read(getClass().getResource("\"/finalProject/images/RightProfile.png\""));
+          spriteLeft = ImageIO.read(getClass().getResource("\"/finalProject/images/LeftProfile.png\""));
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+ }
  /**
   * Method to move the sprite using the KeyListerners in the GamePanel 
   */
@@ -32,7 +45,7 @@ public class Player {
       
       dy=dy+1; 
       
-      if(y+ height >= screen-100) {
+      if(y+ height >= screen-50) {
     	  y = screen - height - 50;
     	  dy=0; 
     	  isOnGround=true; }
@@ -41,9 +54,32 @@ public class Player {
     	 }
       }
   
+  public void moveLeft() {
+      dx =-speed;
+      facingRight = false;
+  }
+  
+  public void moveRight() {
+      dx = speed;
+      facingRight = true;
+  }
+  
+  public void stopMoving() {
+      dx = 0;
+  }
+  
+  public void jump() {
+      if (isOnGround) {
+          dy = JUMP_STRENGTH;
+          isOnGround = false;
+      }
+  }
  /**
   * Method to draw just like in Ball Class
   */
- 
+  public void draw(Graphics2D g2) {
+      BufferedImage img = (facingRight) ? spriteRight : spriteLeft;
+      g2.drawImage(img, (int)x,(int)y,width,height,null);
+  }
   
 }

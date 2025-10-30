@@ -9,8 +9,8 @@ public abstract class Entity {
 	int height; 
 	double dx;
 	double dy;
-	double leftBound;
-	double rightBound;
+	protected double leftBound;
+	protected double rightBound;
 
 	public Entity(double x, double y, int width, int height, double dx, double dy, double leftBound, double rightBound) {
 		this.x = x;
@@ -23,6 +23,7 @@ public abstract class Entity {
 		this.rightBound = rightBound;
 	}
 	
-	public abstract Rectangle getBounds();
+	public abstract double getLeftBound();
+	public abstract double getRightBound();
 	public abstract void move();
 }

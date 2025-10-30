@@ -10,15 +10,20 @@ public class Enemy extends Entity {
 	}
 
 	@Override
-	public Rectangle getBounds() {
-		// TODO Auto-generated method stub
-		return null;
+	public void move() {
+		//test variables
+		if ((rightBound - x) > (x - leftBound)) dx++;
+		else dx--;
 	}
 
 	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
+	public double getLeftBound() {
+		return leftBound;
+	}
+
+	@Override
+	public double getRightBound() {
+		return rightBound;
 	}
 
 }

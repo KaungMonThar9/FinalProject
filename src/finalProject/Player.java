@@ -11,8 +11,8 @@ import javax.imageio.ImageIO;
  */
 public class Player {
 	
-  private double x,y; 
-  private int width= 50, height=50; 
+  private int x,y; 
+  private int width= 100, height=100; 
   private boolean isOnGround=false; 
   private int yVel=0;
   private int dx = 0, dy = 0;
@@ -22,16 +22,14 @@ public class Player {
  
   
   private BufferedImage spriteLeft;
-  private BufferedImage spriteRight; 
-  private boolean spriteLoaded = false;
+  private BufferedImage spriteRight;  
   
-  
-  public Player(double x,double y,BufferedImage sprite) {
+  public Player(int x,int y) {
 	  this.x=x; 
 	  this.y=y; 
 	  try {
-          spriteRight = ImageIO.read(getClass().getResource("\"/finalProject/images/RightProfile.png\""));
-          spriteLeft = ImageIO.read(getClass().getResource("\"/finalProject/images/LeftProfile.png\""));
+          spriteRight = ImageIO.read(getClass().getResource("RightProfile.png"));
+          spriteLeft = ImageIO.read(getClass().getResource("LeftProfile.png"));
       } catch (IOException e) {
           e.printStackTrace();
       }
@@ -79,7 +77,7 @@ public class Player {
   */
   public void draw(Graphics2D g2) {
       BufferedImage img = (facingRight) ? spriteRight : spriteLeft;
-      g2.drawImage(img, (int)x,(int)y,width,height,null);
+      g2.drawImage(img, x, y,width,height,null);
   }
   
 }

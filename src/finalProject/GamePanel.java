@@ -14,6 +14,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	private final GameComponent canvas = new GameComponent();
 	Timer timer;
     private Player player;
+    private Enemy enemy; 
 
 	
 	public GamePanel() {
@@ -24,6 +25,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         //this.buildKeys();
 
         player= new Player(100,400); 
+        enemy= new Enemy(20,450,100,100,5,-15,0,500); 
         
         setFocusable(true);
 		requestFocusInWindow();

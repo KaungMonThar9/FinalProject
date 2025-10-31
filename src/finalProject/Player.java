@@ -41,7 +41,7 @@ public class Player {
 	  x =x+ dx;
       y =y+ dy;
       
-      dy=dy+1; 
+      dy=dy+1; //accounts for gravity
       
       if(y+ height >= screen-50) {
     	  y = screen - height - 50;
@@ -52,7 +52,7 @@ public class Player {
     	 }
       }
   
-  public void moveLeft() {
+  public void moveLeft() {  // Justin, use in keys 
       dx =-speed;
       facingRight = false;
   }

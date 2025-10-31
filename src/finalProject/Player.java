@@ -28,8 +28,8 @@ public class Player {
 	  this.x=x; 
 	  this.y=y; 
 	  try {
-          spriteRight = ImageIO.read(getClass().getResource("RightProfile.png"));
-          spriteLeft = ImageIO.read(getClass().getResource("LeftProfile.png"));
+          spriteRight = ImageIO.read(getClass().getResource("/finalProject/RightProfile.png"));
+          spriteLeft = ImageIO.read(getClass().getResource("/finalProject/LeftProfile.png"));
       } catch (IOException e) {
           e.printStackTrace();
       }

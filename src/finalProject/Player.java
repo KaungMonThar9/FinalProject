@@ -1,10 +1,9 @@
 package finalProject;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
+import javax.sound.sampled.Clip;
 import javax.imageio.ImageIO;
 /**
  * @author medhanshgupta
@@ -19,14 +18,15 @@ public class Player {
   private final int speed=5; 
   private final int JUMP_STRENGTH = -15;
   private boolean facingRight; 
- 
+  private Clip jumpSound;
   
   private BufferedImage spriteLeft;
   private BufferedImage spriteRight;  
   
-  public Player(int x,int y) {
+  public Player(int x,int y,Clip sound) {
 	  this.x=x; 
 	  this.y=y; 
+	  this.jumpSound= sound;
 	  try {
           spriteRight = ImageIO.read(getClass().getResource("/finalProject/RightProfile.png"));
           spriteLeft = ImageIO.read(getClass().getResource("/finalProject/LeftProfile.png"));
@@ -70,6 +70,15 @@ public class Player {
       if (isOnGround) {
           dy = JUMP_STRENGTH;
           isOnGround = false;
+      }
+      
+      if (jumpSound != null) {
+    	  
+          jumpSound.stop();
+          
+          jumpSound.setFramePosition(0); 
+          
+          jumpSound.start();
       }
   }
  /**

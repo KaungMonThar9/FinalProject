@@ -5,6 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
 
 import javax.swing.*;
 
@@ -12,6 +17,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	
 	private static final long serialVersionUID = 1L;
 	private final GameComponent canvas = new GameComponent();
+	public Clip jumpSound;
 	Timer timer;
     private Player player;
     private Enemy enemy; 
@@ -24,12 +30,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         //this.add(buildControls(), BorderLayout.SOUTH);
         //this.buildKeys();
 
-        player= new Player(100,400); 
-        enemy= new Enemy(20,450,100,100,5,-15,0,500); 
-        
+        player= new Player(100,400, jumpSound); 
+     
         setFocusable(true);
 		requestFocusInWindow();
 		addKeyListener(this);
+		loadJumpSound();
         
 	    timer = new Timer(16, e-> tick());
 	    timer.start();
@@ -80,6 +86,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
+	}
 		
+	public void loadJumpSound() { // Resource added to the Doc
+		try {
+			URL soundURL = getClass().getResource("/finalProject/jump.wav");
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
+	        jumpSound = AudioSystem.getClip();
+	        jumpSound.open(audioIn);	
+		}
+		catch (Exception e) {
+		        e.printStackTrace();
+		        System.out.println("Could not load jump sound file.");
+		        jumpSound = null; 
+		}
 	}
 }

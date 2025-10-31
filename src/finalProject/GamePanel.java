@@ -9,8 +9,6 @@ import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.io.File;
-
 import javax.swing.*;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {

@@ -27,13 +27,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         //this.setBackground(canvas.BG);
         //this.add(buildControls(), BorderLayout.SOUTH);
         //this.buildKeys();
+        loadJumpSound();
 
         player= new Player(100,400, jumpSound); 
      
         setFocusable(true);
 		requestFocusInWindow();
 		addKeyListener(this);
-		loadJumpSound();
+		
         
 	    timer = new Timer(16, e-> tick());
 	    timer.start();

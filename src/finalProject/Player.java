@@ -1,37 +1,35 @@
 package finalProject;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
+import javax.sound.sampled.Clip;
 import javax.imageio.ImageIO;
 /**
  * @author medhanshgupta
  */
 public class Player {
 	
-  private double x,y; 
-  private int width= 50, height=50; 
+  private int x,y; 
+  private int width= 100, height=100; 
   private boolean isOnGround=false; 
   private int yVel=0;
   private int dx = 0, dy = 0;
   private final int speed=5; 
   private final int JUMP_STRENGTH = -15;
   private boolean facingRight; 
- 
+  private Clip jumpSound;
   
   private BufferedImage spriteLeft;
-  private BufferedImage spriteRight; 
-  private boolean spriteLoaded = false;
+  private BufferedImage spriteRight;  
   
-  
-  public Player(double x,double y,BufferedImage sprite) {
+  public Player(int x,int y,Clip sound) {
 	  this.x=x; 
 	  this.y=y; 
+	  this.jumpSound= sound;
 	  try {
-          spriteRight = ImageIO.read(getClass().getResource("\"/finalProject/images/RightProfile.png\""));
-          spriteLeft = ImageIO.read(getClass().getResource("\"/finalProject/images/LeftProfile.png\""));
+          spriteRight = ImageIO.read(getClass().getResource("/finalProject/RightProfile.png"));
+          spriteLeft = ImageIO.read(getClass().getResource("/finalProject/LeftProfile.png"));
       } catch (IOException e) {
           e.printStackTrace();
       }
@@ -43,7 +41,7 @@ public class Player {
 	  x =x+ dx;
       y =y+ dy;
       
-      dy=dy+1; 
+      dy=dy+1; //accounts for gravity
       
       if(y+ height >= screen-50) {
     	  y = screen - height - 50;
@@ -54,7 +52,7 @@ public class Player {
     	 }
       }
   
-  public void moveLeft() {
+  public void moveLeft() {  // Justin, use in keys 
       dx =-speed;
       facingRight = false;
   }
@@ -73,13 +71,22 @@ public class Player {
           dy = JUMP_STRENGTH;
           isOnGround = false;
       }
+      
+      if (jumpSound != null) {
+    	  
+          jumpSound.stop();
+          
+          jumpSound.setFramePosition(0); 
+          
+          jumpSound.start();
+      }
   }
  /**
   * Method to draw just like in Ball Class
   */
   public void draw(Graphics2D g2) {
       BufferedImage img = (facingRight) ? spriteRight : spriteLeft;
-      g2.drawImage(img, (int)x,(int)y,width,height,null);
+      g2.drawImage(img, x, y,width,height,null);
   }
   
 }

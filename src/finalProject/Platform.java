@@ -1,7 +1,7 @@
 package finalProject;
 
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 public class Platform {
 	private int xLeft, yTop, width, height;
@@ -14,7 +14,8 @@ public class Platform {
 	}
 	
 	public void drawRect(Graphics g2d) {
-		g2d.drawRect(this.xLeft, this.yTop, this.width, this.height);
+		g2d.setColor(Color.lightGray);
+		g2d.fillRect(this.xLeft, this.yTop, this.width, this.height);
 	}
 	
 	public int[] platCoords() {

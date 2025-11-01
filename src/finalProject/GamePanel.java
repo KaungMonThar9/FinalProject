@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
     private Player player;
     private Enemy enemy; 
+    private Platform platform1;
 
 	
 	public GamePanel() {
@@ -30,6 +31,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         loadJumpSound();
 
         player= new Player(100,400, jumpSound); 
+        int platform1X = 140;
+        int platform1Y = 200;
+        int platform1Width = 300;
+        enemy = new Enemy(platform1X, platform1Y - 80, 80, 80, 2, 0, platform1X - 20, platform1Width + 160);
+        platform1 = new Platform(platform1X, platform1Y, platform1Width, 20);
      
         setFocusable(true);
 		requestFocusInWindow();
@@ -46,7 +52,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	 */
 	private void tick() {
 		player.move(canvas.getHeight());
+		enemy.move();
 		canvas.setPlayer(player); 
+		canvas.setEnemy(enemy);
+		canvas.setPlatform(platform1);
 		// The last thing so we can see everything visually move
 		canvas.repaint();
 	}

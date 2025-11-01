@@ -10,6 +10,8 @@ public class GameComponent extends JComponent {
 	private Background BG;
 	
 	private Player player;
+	private Enemy enemy;
+	private Platform platform1;
 
 	
 	// We can change these WIDTH and HEIGHT values to adjust the window size
@@ -27,6 +29,14 @@ public class GameComponent extends JComponent {
 	    this.player = p;
 	}
 	
+	public void setEnemy(Enemy e) {
+		this.enemy = e;
+	}
+	
+	public void setPlatform(Platform p) {
+		this.platform1 = p;
+	}
+	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
@@ -36,6 +46,12 @@ public class GameComponent extends JComponent {
 		if (player != null) {
             player.draw(g2);
         }
+		if (enemy!= null) {
+			enemy.draw(g2);
+		}
+		if (platform1!= null) {
+			platform1.drawRect(g2);
+		}
 		
 	}
 }

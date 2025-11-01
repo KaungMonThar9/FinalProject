@@ -4,10 +4,9 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import java.awt.Rectangle;
 
 public class Enemy extends Entity {
-	private boolean facingRight = false;
+	private boolean facingRight = true;
 	private BufferedImage spriteLeft;
 	private BufferedImage spriteRight; 
 	 
@@ -25,14 +24,11 @@ public class Enemy extends Entity {
 	public void move() {
 		//test variables
 		x += dx;
-		if ((rightBound - x) > (x - leftBound)) {
-			facingRight = true;
-			dx++;
-		}
-		else {
-			facingRight = false;
-			dx--;
-		}
+		if ((x < leftBound) || (x + width > rightBound)) {
+			dx = -dx; 
+			facingRight = !facingRight;
+		}	
+			
 	}
 
 	@Override

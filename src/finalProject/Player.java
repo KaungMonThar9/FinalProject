@@ -41,11 +41,13 @@ public class Player {
 	  x =x+ dx;
       y =y+ dy;
       
-      dy=dy+1; //accounts for gravity
+      if (!isOnGround)
+    	  dy=dy+1; //accounts for gravity
+      else
+    	  dy=0;
       
       if(y+ height >= screen-50) {
     	  y = screen - height - 50;
-    	  dy=0; 
     	  isOnGround=true; }
     else {
     	  isOnGround=false;  

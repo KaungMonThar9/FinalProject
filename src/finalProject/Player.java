@@ -55,11 +55,11 @@ public class Player {
       
       	//here
       
-      	if(x>500) {
-      		x=-100;
+      	if(x > GameComponent.WIDTH) {
+      		x = 0 - this.width;
       	}
-      	else if(x<-100) {
-      		x=500;
+      	else if(x < 0 - this.width) {
+      		x = GameComponent.WIDTH;
       	}
   	}
   

@@ -1,17 +1,18 @@
 package finalProject;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+//import java.awt.event.KeyListener;
 import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener {
+public class GamePanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private final GameComponent canvas = new GameComponent();
@@ -27,7 +28,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         this.add(canvas, BorderLayout.CENTER);
         //this.setBackground(canvas.BG);
         //this.add(buildControls(), BorderLayout.SOUTH);
-        //this.buildKeys();
         loadJumpSound();
 
         player= new Player(100,400, jumpSound); 
@@ -37,9 +37,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         enemy = new Enemy(platform1X+50, platform1Y -10, 50, 50, 2, 0, platform1X +20 , platform1Width +100);
         platform1 = new Platform(platform1X, platform1Y, platform1Width, 100);
      
+
+        this.buildKeys();
         setFocusable(true);
 		requestFocusInWindow();
-		addKeyListener(this);
 		
         
 	    timer = new Timer(16, e-> tick());
@@ -60,41 +61,56 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		canvas.repaint();
 	}
 
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		int input= e.getKeyCode(); 
+	private void buildKeys() {
 		
-		if(input==KeyEvent.VK_LEFT)
-		  player.moveLeft();
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 		
-		if(input==KeyEvent.VK_RIGHT)
-		  player.moveRight();
+		this.addKeyListener(new KeyAdapter() {
+	        @Override
+	        public void keyPressed(KeyEvent e) {
+	    		int input= e.getKeyCode(); 
+	    		
+	    		if (input==KeyEvent.VK_LEFT)
+	    			player.moveLeft();
+	    		
+	    		if (input==KeyEvent.VK_RIGHT)
+	    			player.moveRight();
+	    		
+	    		if (input==KeyEvent.VK_UP)
+	    			player.jump();
+	    			
+	    	}
+	        
+	        @Override
+	        public void keyReleased(KeyEvent e) {
+	    		int input= e.getKeyCode(); 
+	    		if(input==KeyEvent.VK_LEFT || input==KeyEvent.VK_RIGHT) 
+	    			player.stopMoving(); 
+	    	}
+	    });
 		
-		if(input==KeyEvent.VK_UP)
-			player.jump();
-			
 	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		int input= e.getKeyCode(); 
-		if(input==KeyEvent.VK_LEFT || input==KeyEvent.VK_RIGHT) 
-		  player.stopMoving(); 
-	}
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		tick(); 
-		
-	}
-
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-	}
+	
+//	public void keyPressed(KeyEvent e) {
+//		int input= e.getKeyCode(); 
+//		
+//		if(input==KeyEvent.VK_LEFT)
+//		  player.moveLeft();
+//		
+//		if(input==KeyEvent.VK_RIGHT)
+//		  player.moveRight();
+//		
+//		if(input==KeyEvent.VK_UP)
+//			player.jump();
+//			
+//	}
+//	
+//	public void keyReleased(KeyEvent e) {
+//		int input= e.getKeyCode(); 
+//		if(input==KeyEvent.VK_LEFT || input==KeyEvent.VK_RIGHT) 
+//		  player.stopMoving(); 
+//	}
 		
 	public void loadJumpSound() { // Resource added to the Doc
 		try {

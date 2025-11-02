@@ -50,6 +50,15 @@ public class Player {
     else {
     	  isOnGround=false;  
     	 }
+      
+      //here
+      
+      if(x==490) {
+    	  x=0;
+      }
+      else if(x==0) {
+    	  x=490;
+      }
       }
   
   public void moveLeft() {  // Justin, use in keys 

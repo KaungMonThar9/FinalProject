@@ -2,20 +2,30 @@ package finalProject;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Platform {
 	private int xLeft, yTop, width, height;
+	private BufferedImage plat; 
 	
 	public Platform(int xLeft, int yTop, int width, int height) {
 		this.xLeft = xLeft;
 		this.yTop = yTop;
 		this.width = width;
 		this.height = height;
+		
+		try {
+	          plat = ImageIO.read(getClass().getResource("/finalProject/images/Platform.png"));
+	      } catch (IOException e) {
+	          e.printStackTrace();
+	      }
 	}
 	
-	public void drawRect(Graphics g2d) {
-		g2d.setColor(Color.lightGray);
-		g2d.fillRect(this.xLeft, this.yTop, this.width, this.height);
+	public void draw(Graphics g2d) {
+		g2d.drawImage(plat, xLeft, yTop, width, height, null);
 	}
 	
 	public int[] platCoords() {

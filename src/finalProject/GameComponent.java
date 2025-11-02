@@ -50,7 +50,7 @@ public class GameComponent extends JComponent {
 			enemy.draw(g2);
 		}
 		if (platform1!= null) {
-			platform1.drawRect(g2);
+			platform1.draw(g2);
 		}
 		
 	}

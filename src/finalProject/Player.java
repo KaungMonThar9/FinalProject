@@ -49,19 +49,19 @@ public class Player {
       if(y+ height >= screen-50) {
     	  y = screen - height - 50;
     	  isOnGround=true; }
-    else {
+      else {
     	  isOnGround=false;  
     	 }
       
-      //here
+      	//here
       
-      if(x==490) {
-    	  x=0;
-      }
-      else if(x==0) {
-    	  x=490;
-      }
-      }
+      	if(x==490) {
+      		x=0;
+      	}
+      	else if(x==0) {
+      		x=490;
+      	}
+  	}
   
   public void moveLeft() {  // Justin, use in keys 
       dx =-speed;

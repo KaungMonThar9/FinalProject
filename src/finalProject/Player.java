@@ -55,14 +55,17 @@ public class Player {
       
       	//here
       
-      	if(x==490) {
-      		x=0;
+      	if(x>500) {
+      		x=-100;
       	}
-      	else if(x==0) {
-      		x=490;
+      	else if(x<-100) {
+      		x=500;
       	}
   	}
   
+  /**
+   * Sets the player to move left
+   */
   public void moveLeft() {  // Justin, use in keys 
       dx =-speed;
       facingRight = false;

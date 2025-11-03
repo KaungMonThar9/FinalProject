@@ -1,5 +1,9 @@
 package finalProject;
 
+/**
+ * The class the launches and starts the game
+ */
+
 import javax.swing.SwingUtilities;
 
 /**

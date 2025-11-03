@@ -1,4 +1,7 @@
 package finalProject;
+/**
+ * This class is responsible for the collectible items on-screen which for Milestone 2 will result in increase in player score
+ */
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

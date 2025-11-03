@@ -1,4 +1,7 @@
 package finalProject;
+/**
+ * The game background 
+ */
 
 import java.awt.Color;
 import java.awt.Graphics2D;

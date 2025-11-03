@@ -1,4 +1,7 @@
 package finalProject;
+/**
+ * This class handles the movement of the Enemy within a given bounds. It moves automatically and uses multiple sprites
+ */
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

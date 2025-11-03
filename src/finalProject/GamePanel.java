@@ -1,17 +1,10 @@
 package finalProject;
 
 import java.awt.*;
-<<<<<<< HEAD
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-=======
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
->>>>>>> branch 'main' of https://github.com/KaungMonThar9/FinalProject.git
 import java.awt.event.KeyEvent;
-//import java.awt.event.KeyListener;
 import java.net.URL;
 import java.util.ArrayList;
 

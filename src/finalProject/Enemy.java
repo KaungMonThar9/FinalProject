@@ -43,7 +43,13 @@ public class Enemy extends Entity {
 
 
 	public void draw(Graphics2D g2) {
-	      BufferedImage img = (facingRight) ? spriteRight : spriteLeft;
-	      g2.drawImage(img, (int)x,(int)y,width,height,null);
+		if(facingRight) {
+			BufferedImage img = spriteRight;
+			g2.drawImage(img, (int)x,(int)y,width,height,null);
+		}
+		else {
+			BufferedImage img = spriteLeft;
+			g2.drawImage(img, (int)x,(int)y,width,height,null);
+		}
 	  }
 }

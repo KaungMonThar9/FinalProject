@@ -112,8 +112,14 @@ public class Player {
   * Method to draw just like in Ball Class
   */
   public void draw(Graphics2D g2) {
-      BufferedImage img = (facingRight) ? spriteRight : spriteLeft;
-      g2.drawImage(img, x, y,width,height,null);
+	  if(facingRight) {
+		  BufferedImage img = spriteRight; 
+		  g2.drawImage(img, x, y,width,height,null);
+	  }
+	  else {
+		  BufferedImage img = spriteLeft;
+		  g2.drawImage(img, x, y,width,height,null);
+	  }
   }
   
 }

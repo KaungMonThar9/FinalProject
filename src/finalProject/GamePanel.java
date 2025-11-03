@@ -40,8 +40,8 @@ public class GamePanel extends JPanel {
         platform1 = new Platform(platform1X, platform1Y, platform1Width, 100);
      
 		canvas.setPlayer(player); 
-		canvas.setEnemy(enemy);
-		canvas.setPlatform(platform1);
+		canvas.addEnemy(enemy);
+		canvas.addPlatform(platform1);
 		
 		canvas.addCollectable(1, 390);
 		canvas.addCollectable(300, 390);

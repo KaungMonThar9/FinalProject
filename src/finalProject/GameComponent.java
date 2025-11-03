@@ -11,8 +11,8 @@ public class GameComponent extends JComponent {
 	private Background BG;
 	
 	private Player player;
-	private Enemy enemy;
-	private Platform platform1;
+	private ArrayList<Enemy> enemies = new ArrayList<>();
+	private ArrayList<Platform> platforms = new ArrayList<>();
     private ArrayList<Collectable> collectables = new ArrayList<>();
 
 	
@@ -31,12 +31,12 @@ public class GameComponent extends JComponent {
 	    this.player = p;
 	}
 	
-	public void setEnemy(Enemy e) {
-		this.enemy = e;
+	public void addEnemy(Enemy e) {
+		enemies.add(e);
 	}
 	
-	public void setPlatform(Platform p) {
-		this.platform1 = p;
+	public void addPlatform(Platform p) {
+		platforms.add(p);
 	}
 	
 	public void addCollectable(int x, int y) {
@@ -55,11 +55,11 @@ public class GameComponent extends JComponent {
 		if (player != null) {
             player.draw(g2);
         }
-		if (enemy!= null) {
-			enemy.draw(g2);
+		for (Enemy e : enemies) {
+			e.draw(g2);
 		}
-		if (platform1!= null) {
-			platform1.draw(g2);
+		for (Platform p : platforms) {
+			p.draw(g2);
 		}
 	}
 }

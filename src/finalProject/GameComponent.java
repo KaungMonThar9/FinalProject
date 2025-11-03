@@ -62,4 +62,10 @@ public class GameComponent extends JComponent {
 			p.draw(g2);
 		}
 	}
+	
+	public void handleCollisions() {
+		for (Enemy e : enemies) {
+			
+		}
+	}
 }

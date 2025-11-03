@@ -63,6 +63,7 @@ public class GamePanel extends JPanel {
 	private void tick() {
 		player.move(canvas.getHeight());
 		enemy.move();
+		canvas.handleCollisions();
 		//canvas.addCollectable(0,0)
 		// The last thing so we can see everything visually move
 		canvas.repaint();

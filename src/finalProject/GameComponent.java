@@ -15,6 +15,9 @@ public class GameComponent extends JComponent {
 	private ArrayList<Platform> platforms = new ArrayList<>();
     private ArrayList<Collectable> collectables = new ArrayList<>();
 
+	private int score=0;
+	private int life=3;
+	private int iframes=0;
 	
 	// We can change these WIDTH and HEIGHT values to adjust the window size
 	public static final int WIDTH = 500;
@@ -34,6 +37,7 @@ public class GameComponent extends JComponent {
 	public void addEnemy(Enemy e) {
 		enemies.add(e);
 	}
+	
 	
 	public void addPlatform(Platform p) {
 		platforms.add(p);
@@ -61,17 +65,51 @@ public class GameComponent extends JComponent {
 		for (Platform p : platforms) {
 			p.draw(g2);
 		}
+		g2.setColor(Color.BLACK);
+		g2.setFont(new Font("Arial", Font.BOLD, 20));
+		g2.drawString("Score: " + score, 20, 30);
+		
+		g2.setColor(Color.BLACK);
+		g2.setFont(new Font("Arial", Font.BOLD, 20));
+		g2.drawString("Lives: " + life, 20, 50);
+
 	}
 	
 	public void handleCollisions() {
+		if (iframes > 0) {
+			iframes -= 1;
+		}
+		
 		for (Enemy e : enemies) {
-			
+			if (e.getCollision().intersects(player.getCollision())) {
+				System.out.println("Enemy Collision");
+				if (iframes == 0) {
+					life -= 1;
+					iframes = 50;
+				}
 		}
 		for (Platform p: platforms) {
 			if (p.getPlatCollision().intersects(player.getCollision())) {
 				player.platSideCollide();
+			
+
+		//Start of Collectible-Player collides 
+		ArrayList<Collectable> toDelete = new ArrayList<>();
+		for(Collectable c : collectables) {
+			if (player.getCollision().intersects(c.getCCollision())) {
+	            System.out.println("Collected an powerup");
+	            score=score+10; 
+	            toDelete.add(c);
+		 }
+	   }
+		for (Collectable c : toDelete) {
+	        collectables.remove(c);
+	    }
+		//End of Collectible-Player collides 
+			}
 			}
 		}
-		
 	}
 }
+
+

@@ -4,6 +4,7 @@ package finalProject;
  */
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
@@ -36,4 +37,7 @@ public class Collectable {
     		g2.fillRect(x, y, WIDTH, HEIGHT);
     	}
     }
+	 public Rectangle getCCollision() {
+			return new Rectangle(x, y, WIDTH,HEIGHT);
+	  }
 }

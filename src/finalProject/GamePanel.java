@@ -7,6 +7,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 //import java.awt.event.KeyListener;
 import java.net.URL;
+import java.util.ArrayList;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -26,6 +28,7 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
     	this.setLayout(new BorderLayout(8, 8));
         this.add(canvas, BorderLayout.CENTER);
+        
         //this.setBackground(canvas.BG);
         //this.add(buildControls(), BorderLayout.SOUTH);
         loadJumpSound();
@@ -37,7 +40,14 @@ public class GamePanel extends JPanel {
         enemy = new Enemy(platform1X+50, platform1Y -10, 50, 50, 2, 0, platform1X +20 , platform1Width +100);
         platform1 = new Platform(platform1X, platform1Y, platform1Width, 100);
      
-
+		canvas.setPlayer(player); 
+		canvas.setEnemy(enemy);
+		canvas.setPlatform(platform1);
+		
+		canvas.addCollectable(1, 390);
+		canvas.addCollectable(300, 390);
+		canvas.addCollectable(250, platform1Y);
+		
         this.buildKeys();
         setFocusable(true);
 		requestFocusInWindow();
@@ -54,9 +64,7 @@ public class GamePanel extends JPanel {
 	private void tick() {
 		player.move(canvas.getHeight());
 		enemy.move();
-		canvas.setPlayer(player); 
-		canvas.setEnemy(enemy);
-		canvas.setPlatform(platform1);
+		//canvas.addCollectable(0,0)
 		// The last thing so we can see everything visually move
 		canvas.repaint();
 	}

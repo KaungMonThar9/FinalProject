@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.sound.sampled.Clip;
 import javax.imageio.ImageIO;
 /**
- * @author medhanshgupta
+ * This class handles the on-screen player and it's key controls. 
  */
 public class Player {
 	

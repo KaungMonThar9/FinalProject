@@ -34,7 +34,7 @@ public class GamePanel extends JPanel {
 
         player= new Player(100,400, jumpSound); 
         int platform1X = 140;
-        int platform1Y = 200;
+        int platform1Y = 300;
         int platform1Width = 300;
         enemy = new Enemy(platform1X+50, platform1Y -10, 50, 50, 2, 0, platform1X +20 , platform1Width +100);
         platform1 = new Platform(platform1X, platform1Y, platform1Width, 100);

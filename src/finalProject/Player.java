@@ -1,6 +1,7 @@
 package finalProject;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.sound.sampled.Clip;
@@ -120,6 +121,10 @@ public class Player {
 		  BufferedImage img = spriteLeft;
 		  g2.drawImage(img, x, y,width,height,null);
 	  }
+  }
+  
+  public Rectangle getCollision() {
+		return new Rectangle(x, y, width, height);
   }
   
 }

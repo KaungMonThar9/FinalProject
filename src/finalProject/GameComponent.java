@@ -65,7 +65,9 @@ public class GameComponent extends JComponent {
 	
 	public void handleCollisions() {
 		for (Enemy e : enemies) {
-			
+			if (e.getCollision().intersects(player.getCollision())) {
+				System.out.println("Enemy Collision");
+			}
 		}
 	}
 }

@@ -15,7 +15,7 @@ public class GameComponent extends JComponent {
 	private ArrayList<Platform> platforms = new ArrayList<>();
     private ArrayList<Collectable> collectables = new ArrayList<>();
 
-	
+	private int score=0; 
 	// We can change these WIDTH and HEIGHT values to adjust the window size
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
@@ -34,6 +34,11 @@ public class GameComponent extends JComponent {
 	public void addEnemy(Enemy e) {
 		enemies.add(e);
 	}
+
+	public void setScore() {
+		score=this.score; 
+	}
+	
 	
 	public void addPlatform(Platform p) {
 		platforms.add(p);
@@ -61,6 +66,10 @@ public class GameComponent extends JComponent {
 		for (Platform p : platforms) {
 			p.draw(g2);
 		}
+		g2.setColor(Color.BLACK);
+		g2.setFont(new Font("Arial", Font.BOLD, 20));
+		g2.drawString("Score: " + score, 20, 30);
+
 	}
 	
 	public void handleCollisions() {
@@ -69,5 +78,17 @@ public class GameComponent extends JComponent {
 				System.out.println("Enemy Collision");
 			}
 		}
+		
+		ArrayList<Collectable> toDelete = new ArrayList<>();
+		for(Collectable c : collectables) {
+			if (player.getCollision().intersects(c.getCCollision())) {
+	            System.out.println("Collected an powerup");
+	            score=score+10; 
+	            toDelete.add(c);
+		 }
+	   }
+		for (Collectable c : toDelete) {
+	        collectables.remove(c);
+	    }
 	}
 }

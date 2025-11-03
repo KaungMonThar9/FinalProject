@@ -22,7 +22,7 @@ public class Collectable {
 		this.y = y;
 		
 		try {
-			sprite = ImageIO.read(Background.class.getResource("Collectable.png"));
+			sprite = ImageIO.read(Background.class.getResource("/finalProject/images/Collectable.png"));
 			spriteLoaded = true;
 		} catch (Exception e) {
 			spriteLoaded = false;

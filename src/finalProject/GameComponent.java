@@ -24,7 +24,7 @@ public class GameComponent extends JComponent {
 		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		
 		// I'll probably move the background related stuff to a level class
-		this.BG = new Background("backgroundSunny.png");
+		this.BG = new Background("/finalProject/images/backgroundSunny.png");
 	}
 	
 	public void setPlayer(Player p) {

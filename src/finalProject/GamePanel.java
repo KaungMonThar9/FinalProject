@@ -121,7 +121,7 @@ public class GamePanel extends JPanel {
 		
 	public void loadJumpSound() { // Resource added to the Doc
 		try {
-			URL soundURL = getClass().getResource("/finalProject/jump.wav");
+			URL soundURL = getClass().getResource("/finalProject/Images/jump.wav");
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
 	        jumpSound = AudioSystem.getClip();
 	        jumpSound.open(audioIn);	

@@ -34,8 +34,8 @@ public class Player {
 	  this.y=y; 
 	  this.jumpSound= sound;
 	  try {
-          spriteRight = ImageIO.read(getClass().getResource("/finalProject/RightProfile.png"));
-          spriteLeft = ImageIO.read(getClass().getResource("/finalProject/LeftProfile.png"));
+          spriteRight = ImageIO.read(getClass().getResource("/finalProject/images/RightProfile.png"));
+          spriteLeft = ImageIO.read(getClass().getResource("/finalProject/images/LeftProfile.png"));
       } catch (IOException e) {
           e.printStackTrace();
       }
@@ -109,7 +109,7 @@ public class Player {
       }
   }
  /**
-  * Method to draw just like in Ball Class
+  * Method to draw 
   */
   public void draw(Graphics2D g2) {
 	  if(facingRight) {

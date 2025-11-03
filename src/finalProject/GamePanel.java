@@ -32,12 +32,12 @@ public class GamePanel extends JPanel {
         //this.add(buildControls(), BorderLayout.SOUTH);
         loadJumpSound();
 
-        player= new Player(100,400, jumpSound); 
+        player= new Player(50,200, jumpSound); 
         int platform1X = 140;
-        int platform1Y = 300;
-        int platform1Width = 300;
-        enemy = new Enemy(platform1X+50, platform1Y -10, 50, 50, 2, 0, platform1X +20 , platform1Width +100);
-        platform1 = new Platform(platform1X, platform1Y, platform1Width, 100);
+        int platform1Y = 380;
+        int platform1Width = 200;
+        enemy = new Enemy(platform1X+50, platform1Y - 50, 50, 50, 2, 0, platform1X +20 , platform1Width +100);
+        platform1 = new Platform(platform1X, platform1Y, platform1Width, 20);
      
 		canvas.setPlayer(player); 
 		canvas.addEnemy(enemy);

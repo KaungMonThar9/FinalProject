@@ -18,7 +18,7 @@ public class Player {
 	private final boolean moveMidAir = true;
 	
   private int x,y; 
-  private int width= 100, height=100; 
+  private int width= 60, height=60; 
   private boolean isOnGround=false; 
 //  private int yVel=0;
   private int dx = 0, dy = 0;
@@ -125,6 +125,11 @@ public class Player {
   
   public Rectangle getCollision() {
 		return new Rectangle(x, y, width, height);
+  }
+  public void platSideCollide() {
+	x -= dx;
+	dx = 0;
+	
   }
   
 }

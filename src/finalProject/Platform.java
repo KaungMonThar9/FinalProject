@@ -4,6 +4,7 @@ package finalProject;
  */
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -30,7 +31,7 @@ public class Platform {
 		g2d.drawImage(plat, xLeft, yTop, width, height, null);
 	}
 	
-	public int[] platCoords() {
-		return new int [] {xLeft, yTop, width, height};
+	public Rectangle getPlatCollision() {
+		return new Rectangle (xLeft, yTop, width, height);
 	}
 }

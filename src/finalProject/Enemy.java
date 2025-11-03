@@ -4,6 +4,7 @@ package finalProject;
  */
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -55,4 +56,8 @@ public class Enemy extends Entity {
 			g2.drawImage(img, (int)x,(int)y,width,height,null);
 		}
 	  }
+	
+	public Rectangle getCollision() {
+		return new Rectangle((int) x, (int) y, width, height);
+	}
 }

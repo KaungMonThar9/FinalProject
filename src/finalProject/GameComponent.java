@@ -87,10 +87,13 @@ public class GameComponent extends JComponent {
 					life -= 1;
 					iframes = 50;
 				}
+			}
 		}
 		for (Platform p: platforms) {
 			if (p.getPlatCollision().intersects(player.getCollision())) {
 				player.platSideCollide();
+			}
+		}
 			
 
 		//Start of Collectible-Player collides 
@@ -106,9 +109,6 @@ public class GameComponent extends JComponent {
 	        collectables.remove(c);
 	    }
 		//End of Collectible-Player collides 
-			}
-			}
-		}
 	}
 }
 

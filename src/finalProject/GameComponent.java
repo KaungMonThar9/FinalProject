@@ -78,7 +78,7 @@ public class GameComponent extends JComponent {
 				System.out.println("Enemy Collision");
 			}
 		}
-		
+		//Start of Collectible-Player collides 
 		ArrayList<Collectable> toDelete = new ArrayList<>();
 		for(Collectable c : collectables) {
 			if (player.getCollision().intersects(c.getCCollision())) {
@@ -90,5 +90,6 @@ public class GameComponent extends JComponent {
 		for (Collectable c : toDelete) {
 	        collectables.remove(c);
 	    }
+		//End of Collectible-Player collides 
 	}
 }

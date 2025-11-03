@@ -99,26 +99,6 @@ public class GamePanel extends JPanel {
 		
 	}
 	
-//	public void keyPressed(KeyEvent e) {
-//		int input= e.getKeyCode(); 
-//		
-//		if(input==KeyEvent.VK_LEFT)
-//		  player.moveLeft();
-//		
-//		if(input==KeyEvent.VK_RIGHT)
-//		  player.moveRight();
-//		
-//		if(input==KeyEvent.VK_UP)
-//			player.jump();
-//			
-//	}
-//	
-//	public void keyReleased(KeyEvent e) {
-//		int input= e.getKeyCode(); 
-//		if(input==KeyEvent.VK_LEFT || input==KeyEvent.VK_RIGHT) 
-//		  player.stopMoving(); 
-//	}
-		
 	public void loadJumpSound() { // Resource added to the Doc
 		try {
 			URL soundURL = getClass().getResource("/finalProject/Images/jump.wav");

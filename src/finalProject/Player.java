@@ -10,10 +10,16 @@ import javax.imageio.ImageIO;
  */
 public class Player {
 	
+	/**
+	 * A hardcoded value for that one feature we talked about, if false the player
+	 * cannot move left or right after jumping
+	 */
+	private final boolean moveMidAir = true;
+	
   private int x,y; 
   private int width= 100, height=100; 
   private boolean isOnGround=false; 
-  private int yVel=0;
+//  private int yVel=0;
   private int dx = 0, dy = 0;
   private final int speed=5; 
   private final int JUMP_STRENGTH = -15;
@@ -38,8 +44,8 @@ public class Player {
   * Method to move the sprite using the KeyListerners in the GamePanel 
   */
   public void move(int screen) {
-	  x =x+ dx;
-      y =y+ dy;
+	  x =x + dx;
+      y =y + dy;
       
       if (!isOnGround)
     	  dy=dy+1; //accounts for gravity
@@ -49,47 +55,57 @@ public class Player {
       if(y+ height >= screen-50) {
     	  y = screen - height - 50;
     	  isOnGround=true; }
-    else {
+      else {
     	  isOnGround=false;  
     	 }
       
-      //here
+      	//here
       
-      if(x==490) {
-    	  x=0;
-      }
-      else if(x==0) {
-    	  x=490;
-      }
-      }
+      	if(x > GameComponent.WIDTH) {
+      		x = 0 - this.width;
+      	}
+      	else if(x < 0 - this.width) {
+      		x = GameComponent.WIDTH;
+      	}
+  	}
   
-  public void moveLeft() {  // Justin, use in keys 
-      dx =-speed;
-      facingRight = false;
+  /**
+   * Sets the player to move left
+   */
+  public void moveLeft() {  // Justin, use in keys
+	  if (isOnGround || moveMidAir) {
+	  	dx = -speed;
+      	facingRight = false;
+	  }
   }
   
   public void moveRight() {
-      dx = speed;
-      facingRight = true;
+	  if (isOnGround || moveMidAir) {
+		  dx = speed;
+		  facingRight = true;
+	  }
   }
   
   public void stopMoving() {
-      dx = 0;
+	  if (isOnGround || moveMidAir) {
+		  dx = 0;
+	  }
   }
   
   public void jump() {
       if (isOnGround) {
           dy = JUMP_STRENGTH;
+          
+          if (jumpSound != null) {
+        	  
+              jumpSound.stop();
+              
+              jumpSound.setFramePosition(0); 
+              
+              jumpSound.start();
+          }
+          
           isOnGround = false;
-      }
-      
-      if (jumpSound != null) {
-    	  
-          jumpSound.stop();
-          
-          jumpSound.setFramePosition(0); 
-          
-          jumpSound.start();
       }
   }
  /**

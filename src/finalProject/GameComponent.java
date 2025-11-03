@@ -1,6 +1,7 @@
 package finalProject;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -12,6 +13,7 @@ public class GameComponent extends JComponent {
 	private Player player;
 	private Enemy enemy;
 	private Platform platform1;
+    private ArrayList<Collectable> collectables = new ArrayList<>();
 
 	
 	// We can change these WIDTH and HEIGHT values to adjust the window size
@@ -37,12 +39,19 @@ public class GameComponent extends JComponent {
 		this.platform1 = p;
 	}
 	
+	public void addCollectable(int x, int y) {
+		collectables.add(new Collectable(x, y));
+	}
+	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		if (BG != null) {
             BG.draw(g2);
         }
+		for (Collectable c : collectables) {
+			c.draw(g2);
+		}
 		if (player != null) {
             player.draw(g2);
         }
@@ -52,6 +61,5 @@ public class GameComponent extends JComponent {
 		if (platform1!= null) {
 			platform1.draw(g2);
 		}
-		
 	}
 }

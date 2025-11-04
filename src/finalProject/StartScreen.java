@@ -14,10 +14,7 @@ public class StartScreen extends JFrame{
 		this.setSize(600,400); 
 		this.setTitle("Start");
 		this.setLayout(new GridLayout(1, 3, 10, 10));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);
-	    setLocationRelativeTo(null); 
-	    
+		
 	    JPanel panel = new JPanel();
         panel.setBackground(Color.BLACK); 
         
@@ -38,9 +35,12 @@ public class StartScreen extends JFrame{
         panel.add(title);
         panel.add(start);
         panel.add(exit);
-
         this.add(panel);
         panel.setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+	    setLocationRelativeTo(null); 
+	    
     }
 }    
       

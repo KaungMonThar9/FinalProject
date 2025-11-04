@@ -92,12 +92,14 @@ public class GameComponent extends JComponent {
 		
 		for (Platform p: platforms) {
 			if (p.getPlatCollision().intersects(player.getCollision())) {
-				if (player.getBot() <= p.getY() + 10 && player.getDy() >= 0)
-					player.onPlat(p.getY(), p.getLeftBound(), p.getRightBound());
-				else if (player.getTop() < p.getY() + p.getHeight() && player.getDy() < 0) {
-					player.collide(p.getY() + p.getHeight());
-				}
-			}
+		        if (player.getBot() - player.getDy() < p.getY() &&
+		                player.getDy() > 0 && player.getBot() >= p.getY()) {
+		            player.onPlat(p.getY(), p.getLeftBound(), p.getRightBound());
+		        }
+		        else if (player.getTop() < p.getY() + p.getHeight() && player.getDy() < 0) {
+		            player.collide(p.getY() + p.getHeight());
+		        }
+		    }
 		}
 			
 

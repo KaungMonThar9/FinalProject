@@ -59,9 +59,9 @@ public class Player {
       if (!isOnGround)
       {
     	  dy=dy+1; //accounts for gravity
-    	  if (y + height >= currentPlatY + 10  && currentPlatY != 0 && dy >= 0 && x > platLB - 10 && x < platRB - 10 && !platBotCollide) {
-			  onPlat(currentPlatY, platLB, platRB);
-		  }
+    	  if (currentPlatY != 0 && (x <= platLB - width || x >= platRB)) {
+    	        currentPlatY = 0; 
+    	    }
       }	      
       else
     	  dy=0;

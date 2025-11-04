@@ -19,7 +19,7 @@ public class Player {
 	
   private int x,y; 
   private int width= 60, height=60; 
-  private boolean isOnGround=false; 
+  public boolean isOnGround=false; 
 //  private int yVel=0;
   private int dx = 0, dy = 0;
   private final int speed=5; 
@@ -44,7 +44,7 @@ public class Player {
  /**
   * Method to move the sprite using the KeyListerners in the GamePanel 
   */
-  public void move(int screen) {
+  public void move() {
 	  x =x + dx;
       y =y + dy;
       
@@ -53,12 +53,12 @@ public class Player {
       else
     	  dy=0;
       
-      if(y+ height >= screen-50) {
-    	  y = screen - height - 50;
-    	  isOnGround=true; }
-      else {
-    	  isOnGround=false;  
-    	 }
+//      if(y+ height >= GameComponent.HEIGHT-50) {
+//    	  y = GameComponent.HEIGHT - height - 50;
+//    	  isOnGround=true; }
+//      else {
+//    	  isOnGround=false;  
+//    	 }
       
       	//here
       
@@ -126,10 +126,39 @@ public class Player {
   public Rectangle getCollision() {
 		return new Rectangle(x, y, width, height);
   }
+  public Rectangle fallCollision() {
+	  if (dy>0) {
+		return new Rectangle(x, y+dy, width, height);
+	  }
+	  else return getCollision();
+  }
+  public Rectangle testFallOnce() {
+	  return new Rectangle(x, y+1, width, height);
+  }
+  public Rectangle fallOnce() {
+	  return new Rectangle(x, y+1, width, height);
+  }
+  
   public void platSideCollide() {
 	x -= dx;
 	dx = 0;
 	
+//	y -= dy;
+	//dy = 0;
+  }
+  public void platTopCollide() {
+//		x -= dx;
+//		dx = 0;
+//		
+	  int temp = 0;
+	  if (dy >= 1)
+		  temp = dy-1;
+	  if (dy <= 0)
+		  temp = -dy;
+		  
+	  
+	  y -= dy;
+	  dy = temp;
   }
   
 }

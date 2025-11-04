@@ -82,7 +82,7 @@ public class GameComponent extends JComponent {
 		
 		for (Enemy e : enemies) {
 			if (e.getCollision().intersects(player.getCollision())) {
-				System.out.println("Enemy Collision");
+				//System.out.println("Enemy Collision");
 				if (iframes == 0) {
 					life -= 1;
 					iframes = 50;
@@ -91,7 +91,18 @@ public class GameComponent extends JComponent {
 		}
 		for (Platform p: platforms) {
 			if (p.getPlatCollision().intersects(player.getCollision())) {
+				System.out.println("Plat Collision");
 				player.platSideCollide();
+			}
+			if (p.getPlatCollision().intersects(player.fallCollision())) {
+				player.isOnGround=true;
+				System.out.println("Fall Collision");
+				player.platTopCollide();
+			}
+			else {
+				if (!p.getPlatCollision().intersects(player.testFallOnce())) {
+					player.fallOnce();
+				}
 			}
 		}
 			
@@ -103,8 +114,8 @@ public class GameComponent extends JComponent {
 	            System.out.println("Collected an powerup");
 	            score=score+10; 
 	            toDelete.add(c);
-		 }
-	   }
+			}
+		}
 		for (Collectable c : toDelete) {
 	        collectables.remove(c);
 	    }

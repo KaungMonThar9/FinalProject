@@ -12,7 +12,8 @@ import javax.imageio.ImageIO;
 
 public class Platform {
 	private int xLeft, yTop, width, height;
-	private BufferedImage plat; 
+	private BufferedImage plat;
+	private boolean visible = true;
 	
 	public Platform(int xLeft, int yTop, int width, int height) {
 		this.xLeft = xLeft;
@@ -26,8 +27,14 @@ public class Platform {
 	          e.printStackTrace();
 	      }
 	}
+	public Platform(int xLeft, int yTop, int width, int height, boolean visibility) {
+		this(xLeft,yTop,width,height);
+		
+		this.visible = visibility;
+	}
 	
 	public void draw(Graphics g2d) {
+		if (visible)
 		g2d.drawImage(plat, xLeft, yTop, width, height, null);
 	}
 	

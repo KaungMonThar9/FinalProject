@@ -34,14 +34,20 @@ public class GamePanel extends JPanel {
 
         player= new Player(50,200, jumpSound); 
         int platform1X = 140;
-        int platform1Y = 380;
+        int platform1Y = 350;
         int platform1Width = 200;
         enemy = new Enemy(platform1X+50, platform1Y - 50, 50, 50, 2, 0, platform1X +20 , platform1Width +100);
         platform1 = new Platform(platform1X, platform1Y, platform1Width, 20);
-     
+        
+        Platform ground = new Platform(0, GameComponent.HEIGHT-50, GameComponent.WIDTH, 20, false);
+        canvas.addPlatform(ground);
+        
 		canvas.setPlayer(player); 
 		canvas.addEnemy(enemy);
 		canvas.addPlatform(platform1);
+		
+		// Delete this test code
+		//canvas.addPlatform(new Platform(platform1X-50, platform1Y-150, platform1Width, 20));
 		
 		canvas.addCollectable(1, 390);
 		canvas.addCollectable(300, 390);
@@ -61,7 +67,7 @@ public class GamePanel extends JPanel {
 	 * Runs every frame
 	 */
 	private void tick() {
-		player.move(canvas.getHeight());
+		player.move();
 		enemy.move();
 		canvas.handleCollisions();
 		//canvas.addCollectable(0,0)

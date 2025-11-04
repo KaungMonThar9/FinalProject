@@ -82,10 +82,10 @@ public class GamePanel extends JPanel {
 	    		if (input==KeyEvent.VK_LEFT)
 	    			player.moveLeft();
 	    		
-	    		if (input==KeyEvent.VK_RIGHT)
+	    		else if  (input==KeyEvent.VK_RIGHT)
 	    			player.moveRight();
 	    		
-	    		if (input==KeyEvent.VK_UP)
+	    		else if (input==KeyEvent.VK_UP)
 	    			player.jump();
 	    			
 	    	}

@@ -26,9 +26,10 @@ public class GameLauncher {
 
 	public static void main(String[] args) {
 		
-		SwingUtilities.invokeLater(()-> new GameApp().show());
-
+		SwingUtilities.invokeLater(()-> {
+			StartScreen start = new StartScreen();
+			start.setVisible(true);
+		}); 
 	}
-
 }
 

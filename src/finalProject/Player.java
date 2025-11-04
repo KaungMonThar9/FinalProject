@@ -15,7 +15,7 @@ public class Player {
 	 * A hardcoded value for that one feature we talked about, if false the player
 	 * cannot move left or right after jumping
 	 */
-	private final boolean moveMidAir = true;
+  private final boolean moveMidAir = true;
 	
   private int x,y; 
   private int width= 60, height=60; 

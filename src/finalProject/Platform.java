@@ -34,4 +34,21 @@ public class Platform {
 	public Rectangle getPlatCollision() {
 		return new Rectangle (xLeft, yTop, width, height);
 	}
+
+	public int getY() {
+		return yTop;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getLeftBound() {
+		return xLeft;
+	}
+
+	public int getRightBound() {
+		return xLeft + width;
+	}
+	 
 }

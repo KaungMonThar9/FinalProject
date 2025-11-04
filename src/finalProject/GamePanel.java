@@ -22,6 +22,7 @@ public class GamePanel extends JPanel {
     private Player player;
     private Enemy enemy; 
     private Platform platform1;
+    private Platform platform2;
 
 	
 	public GamePanel() {
@@ -34,14 +35,20 @@ public class GamePanel extends JPanel {
 
         player= new Player(50,200, jumpSound); 
         int platform1X = 140;
-        int platform1Y = 380;
-        int platform1Width = 200;
-        enemy = new Enemy(platform1X+50, platform1Y - 50, 50, 50, 2, 0, platform1X +20 , platform1Width +100);
-        platform1 = new Platform(platform1X, platform1Y, platform1Width, 20);
+        int platform1Y = 350;
+        
+        int platform2X = 250;
+        int platform2Y = 240;
+        int platformWidth = 200;
+        enemy = new Enemy(platform1X+50, platform1Y - 50, 50, 50, 2, 0, platform1X +20 , platformWidth +100);
+        platform1 = new Platform(platform1X, platform1Y, platformWidth, 20);
+        
+        platform2 = new Platform(platform2X, platform2Y, platformWidth, 20);
      
 		canvas.setPlayer(player); 
 		canvas.addEnemy(enemy);
 		canvas.addPlatform(platform1);
+		canvas.addPlatform(platform2);
 		
 		canvas.addCollectable(1, 390);
 		canvas.addCollectable(300, 390);

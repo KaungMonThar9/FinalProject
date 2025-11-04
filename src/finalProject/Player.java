@@ -18,6 +18,7 @@ public class Player {
 	private final boolean moveMidAir = true;
 	
   private int x,y; 
+  private int currentPlatY = 0;
   private int width= 60, height=60; 
   private boolean isOnGround=false; 
 //  private int yVel=0;
@@ -28,7 +29,14 @@ public class Player {
   private Clip jumpSound;
   
   private BufferedImage spriteLeft;
-  private BufferedImage spriteRight;  
+  private BufferedImage spriteRight;
+
+  private boolean collideY = false;
+
+  private int platLB;
+  private boolean platBotCollide = false;
+  private int platRB;
+
   
   public Player(int x,int y,Clip sound) {
 	  this.x=x; 
@@ -49,15 +57,24 @@ public class Player {
       y =y + dy;
       
       if (!isOnGround)
+      {
     	  dy=dy+1; //accounts for gravity
+    	  if (y + height >= currentPlatY + 10  && currentPlatY != 0 && dy >= 0 && x > platLB - 10 && x < platRB - 10 && !platBotCollide) {
+			  onPlat(currentPlatY, platLB, platRB);
+		  }
+      }	      
       else
     	  dy=0;
       
       if(y+ height >= screen-50) {
-    	  y = screen - height - 50;
-    	  isOnGround=true; }
+    	  if (y+ height >= screen-50)
+    	  {
+        	  y = screen - height - 50;
+    	  }
+    	  isOnGround = true;
+      	}
       else {
-    	  isOnGround=false;  
+    	  isOnGround = false;  
     	 }
       
       	//here
@@ -94,7 +111,7 @@ public class Player {
   }
   
   public void jump() {
-      if (isOnGround) {
+      if (isOnGround || collideY) {
           dy = JUMP_STRENGTH;
           
           if (jumpSound != null) {
@@ -106,7 +123,8 @@ public class Player {
               jumpSound.start();
           }
           
-          isOnGround = false;
+          isOnGround = false;   
+          collideY = false;
       }
   }
  /**
@@ -126,10 +144,30 @@ public class Player {
   public Rectangle getCollision() {
 		return new Rectangle(x, y, width, height);
   }
-  public void platSideCollide() {
-	x -= dx;
-	dx = 0;
+
+  public int getBot() {
+	return y + height;
+  }
+  public int getDy() {
+	return dy;
+  }
+  public void onPlat(int platY, int platLeftBound, int platRightBound) {
+	  y = platY - height; 
+	  dy = 0; 
+	  isOnGround = true;
+	  collideY = true;
+	  currentPlatY = platY;
+	  platLB = platLeftBound;
+	  platRB = platRightBound;
+	  platBotCollide = false;
+  }
+  public int getTop() {
+	return y;
+  }
+  public void collide(int platY) {
+	y = platY;
+	dy = 0;
+	platBotCollide = true;
 	
   }
-  
 }

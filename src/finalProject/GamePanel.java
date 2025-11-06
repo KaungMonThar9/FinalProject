@@ -45,10 +45,16 @@ public class GamePanel extends JPanel {
         
         platform2 = new Platform(platform2X, platform2Y, platformWidth, 20);
      
+        int platform1Width = 200;
+        enemy = new Enemy(platform1X+50, platform1Y - 50, 50, 50, 2, 0, platform1X +20 , platform1Width +100);
+                
 		canvas.setPlayer(player); 
 		canvas.addEnemy(enemy);
 		canvas.addPlatform(platform1);
 		canvas.addPlatform(platform2);
+		
+		// Delete this test code
+		//canvas.addPlatform(new Platform(platform1X-50, platform1Y-150, platform1Width, 20));
 		
 		canvas.addCollectable(1, 390);
 		canvas.addCollectable(300, 390);
@@ -89,10 +95,10 @@ public class GamePanel extends JPanel {
 	    		if (input==KeyEvent.VK_LEFT)
 	    			player.moveLeft();
 	    		
-	    		if (input==KeyEvent.VK_RIGHT)
+	    		else if  (input==KeyEvent.VK_RIGHT)
 	    			player.moveRight();
 	    		
-	    		if (input==KeyEvent.VK_UP)
+	    		else if (input==KeyEvent.VK_UP)
 	    			player.jump();
 	    			
 	    	}

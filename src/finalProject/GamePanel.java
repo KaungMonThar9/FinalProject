@@ -23,6 +23,9 @@ public class GamePanel extends JPanel {
     private Enemy enemy; 
     private Platform platform1;
     private Platform platform2;
+    
+    private boolean movingLeft = false;
+    private boolean movingRight = false;
 
 	
 	public GamePanel() {
@@ -86,11 +89,15 @@ public class GamePanel extends JPanel {
 	        public void keyPressed(KeyEvent e) {
 	    		int input= e.getKeyCode(); 
 	    		
-	    		if (input==KeyEvent.VK_LEFT)
+	    		if (input==KeyEvent.VK_LEFT) {
 	    			player.moveLeft();
+	    			movingLeft = true;
+	    		}
 	    		
-	    		if (input==KeyEvent.VK_RIGHT)
+	    		if (input==KeyEvent.VK_RIGHT) {
 	    			player.moveRight();
+	    			movingRight = true;
+	    		}
 	    		
 	    		if (input==KeyEvent.VK_UP)
 	    			player.jump();
@@ -100,8 +107,18 @@ public class GamePanel extends JPanel {
 	        @Override
 	        public void keyReleased(KeyEvent e) {
 	    		int input= e.getKeyCode(); 
-	    		if(input==KeyEvent.VK_LEFT || input==KeyEvent.VK_RIGHT) 
-	    			player.stopMoving(); 
+	    		
+	    		if(input==KeyEvent.VK_LEFT) {
+	    			movingLeft = false;
+	    			if (!movingRight)
+	    				player.stopMoving();
+	    		}
+	    		
+	    		if(input==KeyEvent.VK_RIGHT) {
+	    			movingRight = false;
+	    			if (!movingLeft)
+	    				player.stopMoving();
+	    		}
 	    	}
 	    });
 		

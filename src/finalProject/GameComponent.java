@@ -23,6 +23,9 @@ public class GameComponent extends JComponent {
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
 	
+	private JFrame frame;
+	private boolean gameOver = false;
+	
 	public GameComponent() {
 		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		
@@ -45,6 +48,9 @@ public class GameComponent extends JComponent {
 	
 	public void addCollectable(int x, int y) {
 		collectables.add(new Collectable(x, y));
+	}
+	public void setFrame(JFrame f) {
+	    this.frame = f;
 	}
 	
 	protected void paintComponent(Graphics g) {
@@ -116,6 +122,16 @@ public class GameComponent extends JComponent {
 	        collectables.remove(c);
 	    }
 		//End of Collectible-Player collides 
+		if (life <= 0 && gameOver==false) {
+			gameOver = true;
+			takeUsToStartScreen();
+		    return;
+		}
+	}
+	
+	public void takeUsToStartScreen() {
+		StartScreen start = new StartScreen();
+	    start.setVisible(true);
 	}
 }
 

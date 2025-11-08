@@ -1,7 +1,5 @@
 package finalProject;
 
-import java.awt.Rectangle;
-
 public abstract class Entity {
 	double x;
 	double y; 
@@ -23,7 +21,5 @@ public abstract class Entity {
 		this.rightBound = rightBound;
 	}
 	
-	public abstract double getLeftBound();
-	public abstract double getRightBound();
 	public abstract void move();
 }

@@ -124,8 +124,7 @@ public class GameComponent extends JComponent {
 		//End of Collectible-Player collides 
 		if (life <= 0 && gameOver==false) {
 			gameOver = true;
-			takeUsToStartScreen();
-		    return;
+			takeUsToStartScreen(); 
 		}
 	}
 	

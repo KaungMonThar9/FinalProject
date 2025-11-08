@@ -2,7 +2,6 @@ package finalProject;
 /**
  * This class is responsible for the platforms which the player can collide with. It can also spawn the enemy and the Collectible items. There will 2-3 in every level
  */
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;

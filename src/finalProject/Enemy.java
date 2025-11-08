@@ -23,6 +23,10 @@ public class Enemy extends Entity {
 	          e.printStackTrace();
 	      }
 	}
+	
+	public Enemy(double x, double y, double speed) {
+		this(x, y, 50, 50, speed, 0, 0, GameComponent.WIDTH);
+	}
 
 	@Override
 	public void move() {
@@ -33,16 +37,6 @@ public class Enemy extends Entity {
 			facingRight = !facingRight;
 		}	
 			
-	}
-
-	@Override
-	public double getLeftBound() {
-		return leftBound;
-	}
-
-	@Override
-	public double getRightBound() {
-		return rightBound;
 	}
 
 

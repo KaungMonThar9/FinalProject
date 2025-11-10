@@ -38,8 +38,10 @@ public class Player {
   private boolean collideY = false;
 
   private int platLB;
-  private boolean platBotCollide = false;
+  //private boolean platBotCollide = false;
   private int platRB;
+  
+  private double platSpeed = 0;
 
 
   public Player(int x,int y) {
@@ -72,6 +74,8 @@ public class Player {
   */
   public void move(int screen) {
 	  x =x + dx;
+	  x += platSpeed;
+	  
       y =y + dy;
 
       if (!isOnGround)
@@ -79,6 +83,7 @@ public class Player {
     	  dy=dy+1; //accounts for gravity
     	  if (currentPlatY != 0 && (x <= platLB - width || x >= platRB)) {
     	        currentPlatY = 0;
+    	        platSpeed = 0;
     	    }
       }
       else
@@ -141,6 +146,7 @@ public class Player {
               jumpSound.start();
           }
 
+    	  this.platSpeed = 0;
           isOnGround = false;
           collideY = false;
       }
@@ -169,7 +175,7 @@ public class Player {
   public int getDy() {
 	return dy;
   }
-  public void onPlat(int platY, int platLeftBound, int platRightBound) {
+  public void onPlat(int platY, int platLeftBound, int platRightBound, double platSpeed) {
 	  y = platY - height;
 	  dy = 0;
 	  isOnGround = true;
@@ -177,7 +183,8 @@ public class Player {
 	  currentPlatY = platY;
 	  platLB = platLeftBound;
 	  platRB = platRightBound;
-	  platBotCollide = false;
+	  this.platSpeed = platSpeed;
+	  //platBotCollide = false;
   }
   public int getTop() {
 	return y;
@@ -185,7 +192,7 @@ public class Player {
   public void collide(int platY) {
 	y = platY;
 	dy = 0;
-	platBotCollide = true;
+	//platBotCollide = true;
 
   }
 }

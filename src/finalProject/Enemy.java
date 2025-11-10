@@ -48,26 +48,34 @@ public class Enemy extends Entity {
         x += dx;
         
         if (usePlatformBounds) {
+        	if (Math.abs(dx + platform.dx) > Math.abs(dx))
+                x += platform.dx;
+        }
+        
+        if (dx > 0) facingRight = true;
+        else facingRight = false;
+        
+        if (usePlatformBounds) {
             // Use platform bounds
             if (x < platform.getLeftBound()) {
                 x = platform.getLeftBound();
                 dx = -dx;
-                facingRight = true;
+                //facingRight = true;
             } else if (x + width > platform.getRightBound()) {
                 x = platform.getRightBound() - width;
                 dx = -dx;
-                facingRight = false;
+                //facingRight = false;
             }
         } else {
             // Use fixed bounds
             if (x < leftBound) {
                 x = leftBound;
                 dx = -dx;
-                facingRight = true;
+                //facingRight = true;
             } else if (x + width > rightBound) {
                 x = rightBound - width;
                 dx = -dx;
-                facingRight = false;
+                //facingRight = false;
             }
         }
     }

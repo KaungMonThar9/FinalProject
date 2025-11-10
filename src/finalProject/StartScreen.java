@@ -10,6 +10,11 @@
 	
 	public class StartScreen extends JFrame{
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public StartScreen() {
 			this.setSize(600,400); 
 			this.setTitle("Start");

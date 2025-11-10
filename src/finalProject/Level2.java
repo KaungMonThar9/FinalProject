@@ -10,7 +10,7 @@ public class Level2 extends Level {
 		
 		player = new Player(225,100);
 
-        Platform ground = new Platform(225, 225, 150, 10, 0, 500);
+        Platform ground = new Platform(175, 225, 150, 10, 0, 500);
         
         platforms.add(ground);
         

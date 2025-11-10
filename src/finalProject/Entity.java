@@ -1,7 +1,5 @@
 package finalProject;
 
-import java.awt.Rectangle;
-
 public abstract class Entity {
 	double x;
 	double y; 
@@ -18,5 +16,6 @@ public abstract class Entity {
 		this.dx = dx;
 		this.dy = dy;
 	}
+
 	public abstract void move();
 }

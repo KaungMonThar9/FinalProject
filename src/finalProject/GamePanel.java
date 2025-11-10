@@ -1,28 +1,23 @@
 package finalProject;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.net.URL;
-import java.util.ArrayList;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 public class GamePanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	private final GameComponent canvas = new GameComponent();
+	
+	private Level[] levels = {new Level1(), new Level2(), new GameOver()};
+	private int levelIndex;
+	
+	private GameComponent canvas = new GameComponent();
 	public Clip jumpSound;
 	Timer timer;
     private Player player;
-    private Enemy enemy; 
-    private Platform platform1;
-    private Platform platform2;
+    private EntityModel model = new EntityModel();
     
     private boolean movingLeft = false;
     private boolean movingRight = false;
@@ -34,35 +29,37 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
     	this.setLayout(new BorderLayout(8, 8));
         this.add(canvas, BorderLayout.CENTER);
-        
-        //this.setBackground(canvas.BG);
-        //this.add(buildControls(), BorderLayout.SOUTH);
-        loadJumpSound();
 
-        player= new Player(50,200, jumpSound); 
+        player= new Player(50,200); 
         int platform1X = 140;
         int platform1Y = 350;
         
         int platform2X = 250;
         int platform2Y = 240;
         int platformWidth = 200;
-        platform1 = new Platform(platform1X, platform1Y, platformWidth, 20, platLeftBound, platRightBound);
+        Platform platform1 = new Platform(platform1X, platform1Y, platformWidth, 20, platLeftBound, platRightBound);
         
-        platform2 = new Platform(platform2X, platform2Y, platformWidth, 20, platLeftBound, platRightBound);
+        Platform platform2 = new Platform(platform2X, platform2Y, platformWidth, 20, platLeftBound, platRightBound);
      
-        enemy = new Enemy(platform1X+50, platform1Y - 50, 50, 50, 2, 0, platform1);
+        Enemy enemy = new Enemy(platform1X+50, platform1Y - 50, 50, 50, 2, 0, platform1);
                 
 		canvas.setPlayer(player); 
 		canvas.addEnemy(enemy);
 		canvas.addPlatform(platform1);
 		canvas.addPlatform(platform2);
 		
+		model.addEntity(enemy);
+		model.addEntity(platform1);
+		model.addEntity(platform2);
+
 		// Delete this test code
 		//canvas.addPlatform(new Platform(platform1X-50, platform1Y-150, platform1Width, 20));
 		
-		canvas.addCollectable(1, 390);
-		canvas.addCollectable(300, 390);
-		canvas.addCollectable(250, platform1Y);
+		canvas.addCollectable(new Collectable(1, 390));
+		canvas.addCollectable(new Collectable(300, 390));
+		canvas.addCollectable(new Collectable(250, platform1Y));
+        levelIndex = 0;
+        loadNewLevel(levels[levelIndex]);
 		
         this.buildKeys();
         setFocusable(true);
@@ -79,13 +76,28 @@ public class GamePanel extends JPanel {
 	 */
 	private void tick() {
 		player.move(canvas.getHeight());
-		enemy.move();
-		platform1.move();
-		platform2.move();
+		model.updateAll();
 		canvas.handleCollisions();
 		//canvas.addCollectable(0,0)
 		// The last thing so we can see everything visually move
 		canvas.repaint();
+		if (canvas.testLoad() == 1 && levelIndex+1 != levels.length) {
+    			levelIndex += 1;
+    			loadNewLevel(levels[levelIndex]);
+		} else if (canvas.testLoad() == 2 && levelIndex + 1 != levels.length) {
+			levelIndex = levels.length - 1;
+			loadNewLevel(levels[levelIndex]);
+		}
+	}
+	
+	private void loadNewLevel(Level level) {
+		canvas.clear();
+		model.clear();
+		
+		player = level.player;
+		canvas.setPlayer(player);
+		
+		level.updateComponent(canvas, model);
 	}
 
 	private void buildKeys() {
@@ -108,8 +120,17 @@ public class GamePanel extends JPanel {
 	    			movingRight = true;
 	    		}
 	    		
-	    		else if (input==KeyEvent.VK_UP)
+	    		if (input==KeyEvent.VK_UP)
 	    			player.jump();
+	    		
+	    		
+//	    		/**
+//	    		 * This is a debug key event, it should likely be commented out for final game
+//	    		 */
+//	    		if (input==KeyEvent.VK_F1) {
+//	    			levelIndex += 1;
+//	    			loadNewLevel(levels[levelIndex]);
+//	    		}
 	    			
 	    	}
 	        
@@ -130,20 +151,5 @@ public class GamePanel extends JPanel {
 	    		}
 	    	}
 	    });
-		
-	}
-	
-	public void loadJumpSound() { // Resource added to the Doc
-		try {
-			URL soundURL = getClass().getResource("/finalProject/Images/jump.wav");
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
-	        jumpSound = AudioSystem.getClip();
-	        jumpSound.open(audioIn);	
-		}
-		catch (Exception e) {
-		        e.printStackTrace();
-		        System.out.println("Could not load jump sound file.");
-		        jumpSound = null; 
-		}
 	}
 }

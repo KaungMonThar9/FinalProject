@@ -14,6 +14,8 @@ public class GameComponent extends JComponent {
 	private ArrayList<Enemy> enemies = new ArrayList<>();
 	private ArrayList<Platform> platforms = new ArrayList<>();
     private ArrayList<Collectable> collectables = new ArrayList<>();
+    
+    private Color textColor;
 
 	private int score=0;
 	private int life=3;
@@ -23,11 +25,22 @@ public class GameComponent extends JComponent {
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
 	
+	private JFrame frame;
+	private boolean gameOver = false;
+	
 	public GameComponent() {
 		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
-		
-		// I'll probably move the background related stuff to a level class
-		this.BG = new Background("/finalProject/images/backgroundSunny.png");
+	}
+	
+	public void clear() {
+		player = null;
+		enemies = new ArrayList<>();
+		platforms = new ArrayList<>();
+		collectables = new ArrayList<>();
+	}
+	
+	public void setBackgroundImage(String background) {
+		this.BG = new Background(background);
 	}
 	
 	public void setPlayer(Player p) {
@@ -43,8 +56,15 @@ public class GameComponent extends JComponent {
 		platforms.add(p);
 	}
 	
-	public void addCollectable(int x, int y) {
-		collectables.add(new Collectable(x, y));
+	public void addCollectable(Collectable c) {
+		collectables.add(c);
+	}
+	
+	public void setTextColor(Color textColor) {
+		this.textColor = textColor;
+	}
+	public void setFrame(JFrame f) {
+	    this.frame = f;
 	}
 	
 	protected void paintComponent(Graphics g) {
@@ -65,11 +85,11 @@ public class GameComponent extends JComponent {
 		for (Platform p : platforms) {
 			p.draw(g2);
 		}
-		g2.setColor(Color.BLACK);
+		g2.setColor(textColor);
 		g2.setFont(new Font("Arial", Font.BOLD, 20));
 		g2.drawString("Score: " + score, 20, 30);
 		
-		g2.setColor(Color.BLACK);
+		g2.setColor(textColor);
 		g2.setFont(new Font("Arial", Font.BOLD, 20));
 		g2.drawString("Lives: " + life, 20, 50);
 
@@ -116,6 +136,27 @@ public class GameComponent extends JComponent {
 	        collectables.remove(c);
 	    }
 		//End of Collectible-Player collides 
+		if (life <= 0 && gameOver==false) {
+			gameOver = true;
+			takeUsToStartScreen(); 
+		}
+	}
+	
+	public void takeUsToStartScreen() {
+		StartScreen start = new StartScreen();
+	    start.setVisible(true);
+	}
+	
+	public int testLoad() {
+		// Load Next Level
+		if (collectables.isEmpty())
+			return 1;
+		
+		// Load Game Over Screen
+		if (life <= 0)
+			return 2;
+		
+		return 0;
 	}
 }
 

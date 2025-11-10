@@ -4,6 +4,10 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.imageio.ImageIO;
 /**
@@ -38,17 +42,31 @@ public class Player {
   private int platRB;
 
 
-  public Player(int x,int y,Clip sound) {
+  public Player(int x,int y) {
 	  this.x=x;
 	  this.y=y;
-	  this.jumpSound= sound;
+	  loadJumpSound();
 	  try {
           spriteRight = ImageIO.read(getClass().getResource("/finalProject/images/RightProfile.png"));
           spriteLeft = ImageIO.read(getClass().getResource("/finalProject/images/LeftProfile.png"));
       } catch (IOException e) {
           e.printStackTrace();
       }
- }
+  }
+	
+	private void loadJumpSound() { // Resource added to the Doc
+		try {
+			URL soundURL = getClass().getResource("/finalProject/Images/jump.wav");
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
+	        jumpSound = AudioSystem.getClip();
+	        jumpSound.open(audioIn);	
+		}
+		catch (Exception e) {
+		        e.printStackTrace();
+		        System.out.println("Could not load jump sound file.");
+		        jumpSound = null; 
+		}
+	}
  /**
   * Method to move the sprite using the KeyListerners in the GamePanel
   */

@@ -123,6 +123,9 @@ public class GamePanel extends JPanel {
 	    		if (input==KeyEvent.VK_UP)
 	    			player.jump();
 	    		
+	    		if (input==KeyEvent.VK_DOWN)
+	    			player.collect();
+	    		
 	    		
 //	    		/**
 //	    		 * This is a debug key event, it should likely be commented out for final game

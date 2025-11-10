@@ -42,6 +42,8 @@ public class Player {
   private int platRB;
   
   private double platSpeed = 0;
+  
+  private boolean keyDown = false;
 
 
   public Player(int x,int y) {
@@ -118,6 +120,7 @@ public class Player {
 	  	dx = -speed;
       	facingRight = false;
 	  }
+	  keyDown = false;
   }
 
   public void moveRight() {
@@ -125,6 +128,7 @@ public class Player {
 		  dx = speed;
 		  facingRight = true;
 	  }
+	  keyDown = false;
   }
 
   public void stopMoving() {
@@ -145,6 +149,7 @@ public class Player {
 
               jumpSound.start();
           }
+		  keyDown = false;
 
     	  this.platSpeed = 0;
           isOnGround = false;
@@ -167,6 +172,17 @@ public class Player {
 
   public Rectangle getCollision() {
 		return new Rectangle(x, y, width, height);
+  }
+  
+  public void collect() {
+	  keyDown = true;
+  }
+  
+  public boolean canCollect() {
+	  if (keyDown) {
+		  return true;
+	  }
+	  return false;
   }
 
   public int getBot() {

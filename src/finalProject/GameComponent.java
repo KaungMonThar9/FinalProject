@@ -120,7 +120,7 @@ public class GameComponent extends JComponent {
 		//Start of Collectible-Player collides 
 		ArrayList<Collectable> toDelete = new ArrayList<>();
 		for(Collectable c : collectables) {
-			if (player.getCollision().intersects(c.getCCollision())) {
+			if (player.getCollision().intersects(c.getCCollision()) & player.canCollect()) {
 	            System.out.println("Collected an powerup");
 	            score=score+10; 
 	            toDelete.add(c);

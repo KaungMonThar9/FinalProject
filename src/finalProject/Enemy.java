@@ -13,9 +13,11 @@ public class Enemy extends Entity {
 	private boolean facingRight = true;
 	private BufferedImage spriteLeft;
 	private BufferedImage spriteRight; 
-	 
-	public Enemy(double x, double y, int width, int height, double dx, double dy, double leftBound, double rightBound) {
-		super(x, y, width, height, dx, dy, leftBound, rightBound);
+	private Platform platform;
+
+	public Enemy(double x, double y, int width, int height, double dx, double dy, Platform platform) {
+		super(x, y, width, height, dx, dy);
+		this.platform = platform;
 		try {
 	          spriteRight = ImageIO.read(getClass().getResource("/finalProject/images/rightStation.png"));
 	          spriteLeft = ImageIO.read(getClass().getResource("/finalProject/images/leftStation.png"));
@@ -28,21 +30,16 @@ public class Enemy extends Entity {
 	public void move() {
 		//test variables
 		x += dx;
-		if ((x < leftBound) || (x + width > rightBound)) {
+		if ((x < platform.getLeftBound())) {
+			x = platform.getLeftBound();	
 			dx = -dx; 
 			facingRight = !facingRight;
-		}	
-			
-	}
-
-	@Override
-	public double getLeftBound() {
-		return leftBound;
-	}
-
-	@Override
-	public double getRightBound() {
-		return rightBound;
+		}
+		else if (x + width > platform.getRightBound()) {
+			x = platform.getRightBound() - width;
+			dx = - dx;
+			facingRight = !facingRight;
+		}
 	}
 
 

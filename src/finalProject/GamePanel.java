@@ -26,6 +26,9 @@ public class GamePanel extends JPanel {
     
     private boolean movingLeft = false;
     private boolean movingRight = false;
+    
+    private int platLeftBound = 50;
+    private int platRightBound = 450;
 
 	
 	public GamePanel() {
@@ -43,13 +46,11 @@ public class GamePanel extends JPanel {
         int platform2X = 250;
         int platform2Y = 240;
         int platformWidth = 200;
-        enemy = new Enemy(platform1X+50, platform1Y - 50, 50, 50, 2, 0, platform1X +20 , platformWidth +100);
-        platform1 = new Platform(platform1X, platform1Y, platformWidth, 20);
+        platform1 = new Platform(platform1X, platform1Y, platformWidth, 20, platLeftBound, platRightBound);
         
-        platform2 = new Platform(platform2X, platform2Y, platformWidth, 20);
+        platform2 = new Platform(platform2X, platform2Y, platformWidth, 20, platLeftBound, platRightBound);
      
-        int platform1Width = 200;
-        enemy = new Enemy(platform1X+50, platform1Y - 50, 50, 50, 2, 0, platform1X +20 , platform1Width +100);
+        enemy = new Enemy(platform1X+50, platform1Y - 50, 50, 50, 2, 0, platform1);
                 
 		canvas.setPlayer(player); 
 		canvas.addEnemy(enemy);
@@ -79,6 +80,8 @@ public class GamePanel extends JPanel {
 	private void tick() {
 		player.move(canvas.getHeight());
 		enemy.move();
+		platform1.move();
+		platform2.move();
 		canvas.handleCollisions();
 		//canvas.addCollectable(0,0)
 		// The last thing so we can see everything visually move

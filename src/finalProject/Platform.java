@@ -11,15 +11,17 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Platform {
-	private int xLeft, yTop, width, height;
+	private int xLeft, yTop, width, height, leftPlatBound, rightPlatBound;
 	private BufferedImage plat;
-	private boolean visible = true;
+	private int dx = 2;
 	
-	public Platform(int xLeft, int yTop, int width, int height) {
+	public Platform(int xLeft, int yTop, int width, int height, int leftPlatBound, int rightPlatBound) {
 		this.xLeft = xLeft;
 		this.yTop = yTop;
 		this.width = width;
 		this.height = height;
+		this.leftPlatBound = leftPlatBound;
+		this.rightPlatBound = rightPlatBound;
 		
 		try {
 	          plat = ImageIO.read(getClass().getResource("/finalProject/images/Platform.png"));
@@ -27,14 +29,18 @@ public class Platform {
 	          e.printStackTrace();
 	      }
 	}
-	public Platform(int xLeft, int yTop, int width, int height, boolean visibility) {
-		this(xLeft,yTop,width,height);
-		
-		this.visible = visibility;
-	}
+	
+	public void move() {
+		if (xLeft == leftPlatBound) {
+			dx = - dx;
+		}
+		else if (xLeft + width == rightPlatBound) {
+			dx = - dx;
+		}
+			xLeft += (dx);
+}
 	
 	public void draw(Graphics g2d) {
-		if (visible)
 		g2d.drawImage(plat, xLeft, yTop, width, height, null);
 	}
 	
@@ -57,5 +63,6 @@ public class Platform {
 	public int getRightBound() {
 		return xLeft + width;
 	}
+	
 	 
 }

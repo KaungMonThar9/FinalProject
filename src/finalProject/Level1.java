@@ -14,8 +14,7 @@ public class Level1 extends Level {
 	     Platform platform1 = new Platform(90, 200, w, h, 50, 550);
 	     //Platform platform3 = new Platform(500, 175,w,h, 50,1050); 
 	     Platform platform2= new Platform(350,390,w,h, 550, 1050); 
-	     
-	     Platform platform3= new Platform(50,175,w,h, 50,1050); 
+	    // Platform platform3= new Platform(50,175,w,h, 50,1050); 
 	    
 	     
 	     platforms.add(new Platform(50,480,w,h, 50,550)); 

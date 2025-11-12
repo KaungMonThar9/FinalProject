@@ -22,8 +22,8 @@ public class GameComponent extends JComponent {
 	private int iframes=0;
 	
 	// We can change these WIDTH and HEIGHT values to adjust the window size
-	public static final int WIDTH = 500;
-	public static final int HEIGHT = 500;
+	public static final int WIDTH = 1100;
+	public static final int HEIGHT = 700;
 	
 	public GameComponent() {
 		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));

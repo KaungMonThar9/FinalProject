@@ -28,7 +28,7 @@ public class Player {
 //  private int yVel=0;
   private int dx = 0, dy = 0;
   private final int speed=5;
-  private final int JUMP_STRENGTH = -18;
+  private final int JUMP_STRENGTH = -20;
   private boolean facingRight;
   private Clip jumpSound;
 

@@ -120,7 +120,6 @@ public class Player {
 	  	dx = -speed;
       	facingRight = false;
 	  }
-	  keyDown = false;
   }
 
   public void moveRight() {
@@ -128,7 +127,6 @@ public class Player {
 		  dx = speed;
 		  facingRight = true;
 	  }
-	  keyDown = false;
   }
 
   public void stopMoving() {
@@ -149,7 +147,6 @@ public class Player {
 
               jumpSound.start();
           }
-		  keyDown = false;
 
     	  this.platSpeed = 0;
           isOnGround = false;
@@ -174,15 +171,16 @@ public class Player {
 		return new Rectangle(x, y, width, height);
   }
   
-  public void collect() {
+  public void collectOn() {
 	  keyDown = true;
   }
   
+  public void collectOff() {
+	  keyDown = false;
+  }
+  
   public boolean canCollect() {
-	  if (keyDown) {
-		  return true;
-	  }
-	  return false;
+	  return keyDown;
   }
 
   public int getBot() {

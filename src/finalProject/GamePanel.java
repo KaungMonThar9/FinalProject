@@ -124,7 +124,7 @@ public class GamePanel extends JPanel {
 	    			player.jump();
 	    		
 	    		if (input==KeyEvent.VK_DOWN)
-	    			player.collect();
+	    			player.collectOn();
 	    		
 	    		
 //	    		/**
@@ -152,6 +152,9 @@ public class GamePanel extends JPanel {
 	    			if (!movingLeft)
 	    				player.stopMoving();
 	    		}
+	    		
+	    		if (input==KeyEvent.VK_DOWN)
+	    			player.collectOff();
 	    	}
 	    });
 	}

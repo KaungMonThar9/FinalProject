@@ -25,12 +25,12 @@ public class Level1 extends Level {
 	    platforms.add(platform1);  
 	    platforms.add(platform2);
 	    
-	    collectables.add(new Collectable(130, 300));  
-	    collectables.add(new Collectable(240, 210));  
-	    collectables.add(new Collectable(70, 130));   
-	    collectables.add(new Collectable(370, 130)); 
+	    collectables.add(new Collectable(400, 400));  
+	    collectables.add(new Collectable(500, 210));  
+	    collectables.add(new Collectable(70, 500));   
+	    collectables.add(new Collectable(900, 130)); 
 
-        collectables.add(new Collectable(400, 200));
-        collectables.add(new Collectable(200, 400));
+        collectables.add(new Collectable(300, 300));
+        collectables.add(new Collectable(720, 270));
 	}
 }

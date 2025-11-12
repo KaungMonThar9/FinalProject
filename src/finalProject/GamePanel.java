@@ -10,7 +10,7 @@ public class GamePanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Level[] levels = {new Level1(), new Level2(), new GameOver()};
+	private Level[] levels = {new Level1(), new Level2(), new GameWin(), new GameOver()};
 	private int levelIndex;
 	
 	private GameComponent canvas = new GameComponent();

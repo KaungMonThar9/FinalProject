@@ -59,8 +59,7 @@ import javax.swing.JButton;
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setResizable(false);
 		    setLocationRelativeTo(null); 
-	        setVisible(true);
-		    
+	        setVisible(true);	    
 	    }
 	}    
 	      

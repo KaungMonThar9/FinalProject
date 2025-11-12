@@ -127,13 +127,13 @@ public class GamePanel extends JPanel {
 	    			player.collectOn();
 	    		
 	    		
-//	    		/**
-//	    		 * This is a debug key event, it should likely be commented out for final game
-//	    		 */
-//	    		if (input==KeyEvent.VK_F1) {
-//	    			levelIndex += 1;
-//	    			loadNewLevel(levels[levelIndex]);
-//	    		}
+	    		/**
+	    		 * This is a debug key event, it should likely be commented out for final game
+	    		 */
+	    		if (input==KeyEvent.VK_F1) {
+	    			levelIndex += 1;
+	    			loadNewLevel(levels[levelIndex]);
+	    		}
 	    			
 	    	}
 	        

@@ -9,16 +9,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Platform {
-	private int xLeft, yTop, width, height;
+public class Platform extends Entity {
+	private int leftPlatBound, rightPlatBound;
 	private BufferedImage plat;
-	private boolean visible = true;
 	
-	public Platform(int xLeft, int yTop, int width, int height) {
-		this.xLeft = xLeft;
-		this.yTop = yTop;
-		this.width = width;
-		this.height = height;
+	public Platform(int xLeft, int yTop, int width, int height, int leftPlatBound, int rightPlatBound) {
+		super(xLeft, yTop, width, height, 2, 0);
+		this.leftPlatBound = leftPlatBound;
+		this.rightPlatBound = rightPlatBound;
 		
 		try {
 	          plat = ImageIO.read(getClass().getResource("/finalProject/images/Platform.png"));
@@ -26,23 +24,29 @@ public class Platform {
 	          e.printStackTrace();
 	      }
 	}
-	public Platform(int xLeft, int yTop, int width, int height, boolean visibility) {
-		this(xLeft,yTop,width,height);
-		
-		this.visible = visibility;
-	}
+	
+	public void move() {
+		if (x <= leftPlatBound) {
+			x = leftPlatBound;
+			dx = - dx;
+		}
+		else if (x + width >= rightPlatBound) {
+			x = rightPlatBound - width;
+			dx = - dx;
+		}
+			x += (dx);
+}
 	
 	public void draw(Graphics g2d) {
-		if (visible)
-		g2d.drawImage(plat, xLeft, yTop, width, height, null);
+		g2d.drawImage(plat, (int) x, (int) y, width, height, null);
 	}
 	
 	public Rectangle getPlatCollision() {
-		return new Rectangle (xLeft, yTop, width, height);
+		return new Rectangle ((int) x, (int)y, width, height);
 	}
 
 	public int getY() {
-		return yTop;
+		return (int)y;
 	}
 
 	public int getHeight() {
@@ -50,11 +54,12 @@ public class Platform {
 	}
 
 	public int getLeftBound() {
-		return xLeft;
+		return (int)x;
 	}
 
 	public int getRightBound() {
-		return xLeft + width;
+		return (int)x + width;
 	}
+	
 	 
 }

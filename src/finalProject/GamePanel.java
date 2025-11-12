@@ -21,12 +21,43 @@ public class GamePanel extends JPanel {
     
     private boolean movingLeft = false;
     private boolean movingRight = false;
+    
+    private int platLeftBound = 50;
+    private int platRightBound = 450;
 
 	
 	public GamePanel() {
     	this.setLayout(new BorderLayout(8, 8));
         this.add(canvas, BorderLayout.CENTER);
 
+        player= new Player(50,200); 
+        int platform1X = 140;
+        int platform1Y = 350;
+        
+        int platform2X = 250;
+        int platform2Y = 240;
+        int platformWidth = 200;
+        Platform platform1 = new Platform(platform1X, platform1Y, platformWidth, 20, platLeftBound, platRightBound);
+        
+        Platform platform2 = new Platform(platform2X, platform2Y, platformWidth, 20, platLeftBound, platRightBound);
+     
+        Enemy enemy = new Enemy(platform1X+50, platform1Y - 50, 50, 50, 2, 0, platform1);
+                
+		canvas.setPlayer(player); 
+		canvas.addEnemy(enemy);
+		canvas.addPlatform(platform1);
+		canvas.addPlatform(platform2);
+		
+		model.addEntity(enemy);
+		model.addEntity(platform1);
+		model.addEntity(platform2);
+
+		// Delete this test code
+		//canvas.addPlatform(new Platform(platform1X-50, platform1Y-150, platform1Width, 20));
+		
+		canvas.addCollectable(new Collectable(1, 390));
+		canvas.addCollectable(new Collectable(300, 390));
+		canvas.addCollectable(new Collectable(250, platform1Y));
         levelIndex = 0;
         loadNewLevel(levels[levelIndex]);
 		
@@ -50,10 +81,10 @@ public class GamePanel extends JPanel {
 		//canvas.addCollectable(0,0)
 		// The last thing so we can see everything visually move
 		canvas.repaint();
-		if (canvas.testLoad() == 1 & levelIndex+1 != levels.length) {
+		if (canvas.testLoad() == 1 && levelIndex+1 != levels.length) {
     			levelIndex += 1;
     			loadNewLevel(levels[levelIndex]);
-		} else if (canvas.testLoad() == 2 & levelIndex + 1 != levels.length) {
+		} else if (canvas.testLoad() == 2 && levelIndex + 1 != levels.length) {
 			levelIndex = levels.length - 1;
 			loadNewLevel(levels[levelIndex]);
 		}
@@ -91,6 +122,9 @@ public class GamePanel extends JPanel {
 	    		
 	    		if (input==KeyEvent.VK_UP)
 	    			player.jump();
+	    		
+	    		if (input==KeyEvent.VK_DOWN)
+	    			player.collect();
 	    		
 	    		
 //	    		/**

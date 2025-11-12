@@ -10,11 +10,13 @@ public class Level2 extends Level {
 		
 		player = new Player(225,100);
 
-        platforms.add(new Platform(225, 225, 50, 10));
+        Platform ground = new Platform(175, 225, 150, 10, 0, 500);
         
-        enemies.add(new Enemy(0, 400, 8));
-        enemies.add(new Enemy(400, 400, 8));
-        enemies.add(new Enemy(200, 400, 10));
+        platforms.add(ground);
+        
+        enemies.add(new Enemy(50, 400, 50, 50, 3, 0, 500));
+        enemies.add(new Enemy(300, 400, 50, 50, -3, 0, 500));
+        enemies.add(new Enemy(200, 400, 50, 50, 2, 0, 500));
         
         collectables.add(new Collectable(450, 300));
 	}

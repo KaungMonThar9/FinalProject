@@ -10,12 +10,18 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Enemy extends Entity {
-	private boolean facingRight = true;
+	private boolean facingRight;
 	private BufferedImage spriteLeft;
 	private BufferedImage spriteRight; 
-	 
-	public Enemy(double x, double y, int width, int height, double dx, double dy, double leftBound, double rightBound) {
-		super(x, y, width, height, dx, dy, leftBound, rightBound);
+	private Platform platform;
+	private int leftBound;
+	private int rightBound;
+	private boolean usePlatformBounds;
+
+	public Enemy(double x, double y, int width, int height, double dx, double dy, Platform platform) {
+		super(x, y, width, height, dx, dy);
+		this.platform = platform;
+		this.usePlatformBounds = true;
 		try {
 	          spriteRight = ImageIO.read(getClass().getResource("/finalProject/images/rightStation.png"));
 	          spriteLeft = ImageIO.read(getClass().getResource("/finalProject/images/leftStation.png"));
@@ -24,20 +30,59 @@ public class Enemy extends Entity {
 	      }
 	}
 	
-	public Enemy(double x, double y, double speed) {
-		this(x, y, 50, 50, speed, 0, 0, GameComponent.WIDTH);
+	public Enemy(double x, double y, int width, int height, double dx, int leftBound, int rightBound) {
+		super(x, y, width, height, dx, 0);
+		this.leftBound = leftBound;
+		this.rightBound = rightBound;
+		this.usePlatformBounds = false;
+		try {
+            spriteRight = ImageIO.read(getClass().getResource("/finalProject/images/rightStation.png"));
+            spriteLeft = ImageIO.read(getClass().getResource("/finalProject/images/leftStation.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 	@Override
 	public void move() {
-		//test variables
-		x += dx;
-		if ((x < leftBound) || (x + width > rightBound)) {
-			dx = -dx; 
-			facingRight = !facingRight;
-		}	
+        x += dx;
+        
+        if (usePlatformBounds) {
+        	if (Math.abs(dx + platform.dx) > Math.abs(dx))
+                x += platform.dx;
+        }
+        
+        if (dx > 0) facingRight = true;
+        else facingRight = false;
+        
+        if (usePlatformBounds) {
+            // Use platform bounds
+            if (x < platform.getLeftBound()) {
+                x = platform.getLeftBound();
+                dx = -dx;
+                //facingRight = true;
+            } else if (x + width > platform.getRightBound()) {
+                x = platform.getRightBound() - width;
+                dx = -dx;
+                //facingRight = false;
+            }
+        } else {
+            // Use fixed bounds
+            if (x < leftBound) {
+                x = leftBound;
+                dx = -dx;
+                //facingRight = true;
+            } else if (x + width > rightBound) {
+                x = rightBound - width;
+                dx = -dx;
+                //facingRight = false;
+            }
+        }
+    }
+
 			
-	}
+			
+	
 
 
 	public void draw(Graphics2D g2) {

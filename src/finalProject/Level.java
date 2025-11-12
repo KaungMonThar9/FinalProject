@@ -20,8 +20,12 @@ public class Level {
 			canvas.addEnemy(e);
 			model.addEntity(e);
 		}
-		for (Platform p : platforms)
+		for (Platform p : platforms) {
 			canvas.addPlatform(p);
+			model.addEntity(p);
+		}
+
+			
 		for (Collectable c : collectables)
 			canvas.addCollectable(c);
 	}

@@ -25,9 +25,6 @@ public class GameComponent extends JComponent {
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
 	
-	private JFrame frame;
-	private boolean gameOver = false;
-	
 	public GameComponent() {
 		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
 	}
@@ -62,9 +59,6 @@ public class GameComponent extends JComponent {
 	
 	public void setTextColor(Color textColor) {
 		this.textColor = textColor;
-	}
-	public void setFrame(JFrame f) {
-	    this.frame = f;
 	}
 	
 	protected void paintComponent(Graphics g) {
@@ -114,7 +108,7 @@ public class GameComponent extends JComponent {
 			if (p.getPlatCollision().intersects(player.getCollision())) {
 		        if (player.getBot() - player.getDy() < p.getY() &&
 		            player.getDy() > 0 && player.getBot() >= p.getY()) {
-		            player.onPlat(p.getY(), p.getLeftBound(), p.getRightBound());
+		            player.onPlat(p.getY(), p.getLeftBound(), p.getRightBound(), p.dx);
 		        }
 		        else if (player.getTop() < p.getY() + p.getHeight() && player.getDy() < 0) {
 		            player.collide(p.getY() + p.getHeight());
@@ -126,7 +120,7 @@ public class GameComponent extends JComponent {
 		//Start of Collectible-Player collides 
 		ArrayList<Collectable> toDelete = new ArrayList<>();
 		for(Collectable c : collectables) {
-			if (player.getCollision().intersects(c.getCCollision())) {
+			if (player.getCollision().intersects(c.getCCollision()) & player.canCollect()) {
 	            System.out.println("Collected an powerup");
 	            score=score+10; 
 	            toDelete.add(c);
@@ -136,16 +130,18 @@ public class GameComponent extends JComponent {
 	        collectables.remove(c);
 	    }
 		//End of Collectible-Player collides 
-		if (life <= 0 && gameOver==false) {
-			gameOver = true;
-			takeUsToStartScreen(); 
-		}
+		
+		
+//		if (life <= 0 && gameOver==false) {
+//			gameOver = true;
+//			takeUsToStartScreen(); 
+//		}
 	}
 	
-	public void takeUsToStartScreen() {
-		StartScreen start = new StartScreen();
-	    start.setVisible(true);
-	}
+//	public void takeUsToStartScreen() {
+//		StartScreen start = new StartScreen();
+//	    start.setVisible(true);
+//	}
 	
 	public int testLoad() {
 		// Load Next Level

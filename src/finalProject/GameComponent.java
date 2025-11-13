@@ -1,8 +1,12 @@
 package finalProject;
 
 import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 public class GameComponent extends JComponent {
@@ -20,6 +24,7 @@ public class GameComponent extends JComponent {
 	private int score=0;
 	private int life=3;
 	private int iframes=0;
+	private Clip enemyHitSound;
 	
 	// We can change these WIDTH and HEIGHT values to adjust the window size
 	public static final int WIDTH = 1100;
@@ -27,6 +32,7 @@ public class GameComponent extends JComponent {
 	
 	public GameComponent() {
 		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
+		loadEnemyHitSound();
 	}
 	
 	public void clear() {
@@ -88,7 +94,18 @@ public class GameComponent extends JComponent {
 		g2.drawString("Lives: " + life, 20, 50);
 
 	}
-	
+	private void loadEnemyHitSound() { // Resource added to the Doc
+		try {
+			URL soundURL = getClass().getResource("/finalProject/Images/enemyHitSound.wav");
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
+	        enemyHitSound = AudioSystem.getClip();
+	        enemyHitSound.open(audioIn);	
+		}
+		catch (Exception e) {
+		        e.printStackTrace();
+		        System.out.println("Could not load jump sound file.");
+		}
+	}
 	public void handleCollisions() {
 		if (iframes > 0) {
 			iframes -= 1;
@@ -99,7 +116,10 @@ public class GameComponent extends JComponent {
 				//System.out.println("Enemy Collision");
 				if (iframes == 0) {
 					life -= 1;
-					iframes = 50;
+					iframes = 50;	
+					enemyHitSound.stop();
+					enemyHitSound.setFramePosition(0);
+					enemyHitSound.start();
 				}
 			}
 		}

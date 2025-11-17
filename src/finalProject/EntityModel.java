@@ -1,5 +1,7 @@
 package finalProject;
-
+/**
+ * adding entity
+ */
 import java.util.ArrayList;
 
 public class EntityModel {

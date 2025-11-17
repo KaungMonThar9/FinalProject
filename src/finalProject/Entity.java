@@ -1,5 +1,7 @@
 package finalProject;
-
+/**
+ * This is abstract class for entity
+ */
 public abstract class Entity {
 	double x;
 	double y; 

@@ -1,5 +1,7 @@
 package finalProject;
-
+/**
+ * game over screen
+ */
 public class GameOver extends Level {
 	public GameOver () {
 		background = "/finalProject/images/gameOver.png";

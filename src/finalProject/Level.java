@@ -3,6 +3,9 @@ package finalProject;
 import java.awt.Color;
 import java.util.ArrayList;
 
+/**
+ * Game levels
+ */
 public class Level {
 	protected String background;
 	protected Player player;
